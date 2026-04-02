@@ -17,5 +17,6 @@
 - `prd/05-nfr-design.md` — 비기능(접근성/성능) + 디자인 시스템(블랙+골드 토큰)
 - `prd/06-tech-release-ops.md` — 기술/배포 + 릴리즈 범위(v1/v1.1) + 운영 정책(SLA)
 - `prd/07-inputs.md` — {{PLACEHOLDER}} 교체용 필수 인풋 체크리스트
+- `prd/08-launch-checklist.md` — 배포 전/후 체크리스트 (9단계 + 사고 대응)
 - `prd/99-agent-usage.md` — “PRD 사용량(에이전트가 읽고 쓰는 방식)” 규칙/템플릿
 

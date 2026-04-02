@@ -5,15 +5,21 @@
 ## 10) 기술/배포 (권장 스택)
 
 ### 10.1 구현 스택
-- 권장: Next.js(정적/SSR 혼합 가능)
-- 배포 1순위: Vercel
-- 배포 대안: Netlify(정적 사이트/프리뷰 배포 활용 가능)
+- 프레임워크: Next.js (정적 export 기준)
+- 배포: **Netlify** ✅ (확정)
+  - `next export` or `output: 'export'` 정적 빌드로 배포
+  - Netlify CLI 또는 GitHub 연동 자동 배포
 
-### 10.2 폼 백엔드(권장)
-- v1: 이메일 + Google Sheets
-- 구현 옵션(예시, 선택은 구현 단계에서 확정):
-  - 서버리스 함수(Next.js Route Handler)로 Sheets API 연동
-  - 서드파티 폼 서비스 + 웹훅으로 시트 적재
+### 10.2 폼 백엔드 (확정)
+
+**Google Sheets + Gmail 알림 (무료, 건수 제한 없음)**
+- 폼 제출 → Netlify 서버리스 함수(Function) → Google Sheets API 적재
+- 동시에 Gmail 알림 발송 (수신: `{{LEAD_NOTIFY_EMAIL}}`)
+- 시트 컬럼: created_at / name / phone / interest / location_preference / message / utm_source / utm_medium / utm_campaign / referrer
+
+### 10.3 주의사항 (Netlify + Next.js)
+- Next.js App Router의 Server Actions, Route Handler는 Netlify에서 별도 설정 필요
+- v1은 정적 export로 단순하게 가는 것 권장 (`output: 'export'`)
 
 ---
 
