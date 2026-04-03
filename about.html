@@ -657,6 +657,80 @@
     .sticky-btn-form { background: var(--accent); color: var(--accent-ink); }
 
     /* ============================================================
+       드로어 (프로그램 상세)
+    ============================================================ */
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      z-index: 300;
+      backdrop-filter: blur(2px);
+    }
+    .drawer-overlay.open { display: block; }
+
+    .drawer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 301;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-radius: 20px 20px 0 0;
+      padding: 0 24px 40px;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform .35s cubic-bezier(.32,.72,0,1);
+    }
+    .drawer.open { transform: translateY(0); }
+
+    .drawer-handle {
+      width: 40px; height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 16px auto 24px;
+    }
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .drawer-icon {
+      width: 52px; height: 52px;
+      background: rgba(200,162,74,.1);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .drawer-title { font-size: 22px; font-weight: 700; }
+    .drawer-body { font-size: 15px; color: var(--muted); line-height: 1.8; }
+    .drawer-body p { margin-bottom: 16px; }
+    .drawer-body ul { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .drawer-body li { list-style: disc; }
+    .drawer-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0; }
+    .drawer-cta { margin-top: 24px; display: flex; gap: 10px; }
+    .drawer-cta .btn { flex: 1; }
+
+    /* 카드 클릭 가능 표시 */
+    .program-detail-card {
+      cursor: pointer;
+      position: relative;
+    }
+    .program-detail-card::after {
+      content: '자세히 보기 →';
+      display: block;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .program-detail-card:hover { border-color: rgba(200,162,74,.4); }
+
+    /* ============================================================
        반응형
     ============================================================ */
     @media (max-width: 768px) {
@@ -861,7 +935,7 @@
 
         <div class="programs-detail-grid">
 
-          <div class="program-detail-card reveal" data-delay="1">
+          <div class="program-detail-card reveal" data-delay="1" data-program="swing">
             <div class="program-detail-icon">🏌️</div>
             <p class="program-detail-name">스윙 교정 레슨</p>
             <p class="program-detail-desc">
@@ -875,7 +949,7 @@
             </div>
           </div>
 
-          <div class="program-detail-card reveal" data-delay="2">
+          <div class="program-detail-card reveal" data-delay="2" data-program="beginner">
             <div class="program-detail-icon">🎯</div>
             <p class="program-detail-name">초보자 12주 과정</p>
             <p class="program-detail-desc">
@@ -889,7 +963,7 @@
             </div>
           </div>
 
-          <div class="program-detail-card reveal" data-delay="3">
+          <div class="program-detail-card reveal" data-delay="3" data-program="shortgame">
             <div class="program-detail-icon">⛳</div>
             <p class="program-detail-name">숏게임 레슨</p>
             <p class="program-detail-desc">
@@ -903,7 +977,7 @@
             </div>
           </div>
 
-          <div class="program-detail-card reveal" data-delay="4">
+          <div class="program-detail-card reveal" data-delay="4" data-program="field">
             <div class="program-detail-icon">🌿</div>
             <p class="program-detail-name">필드 레슨</p>
             <p class="program-detail-desc">
@@ -1356,6 +1430,27 @@
 
 
   <!-- ============================================================
+       드로어 (프로그램 상세)
+  ============================================================ -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="programDrawer" role="dialog" aria-modal="true">
+    <div class="drawer-handle"></div>
+    <div class="drawer-header">
+      <div class="drawer-icon" id="drawerIcon"></div>
+      <p class="drawer-title" id="drawerTitle"></p>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-cta">
+      <a href="tel:010-8441-3065" class="btn btn-primary"
+         onclick="gtag('event','cta_click',{button:'drawer_call'})">전화 문의</a>
+      <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
+         class="btn btn-secondary"
+         onclick="gtag('event','cta_click',{button:'drawer_kakao'})">카카오 상담</a>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
        STICKY CTA (모바일)
   ============================================================ -->
   <div id="sticky-cta" role="navigation" aria-label="빠른 문의">
@@ -1413,6 +1508,111 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+    // ── 프로그램 드로어 ──────────────────────────────────────────
+    const PROGRAMS = {
+      swing: {
+        icon: '🏌️',
+        title: '스윙 교정 레슨',
+        tags: ['트랙맨 분석', '1:1 맞춤', '초중급'],
+        body: `
+          <p>TrackMan 데이터로 현재 스윙의 문제를 정확히 진단하고, 개인 맞춤 드릴로 근본적인 교정을 진행합니다.</p>
+          <ul>
+            <li>클럽 패스·페이스 각도·임팩트 데이터 분석</li>
+            <li>주차별 드릴 & 과제 제공</li>
+            <li>레슨 전후 데이터 비교로 성장 확인</li>
+            <li>TODO: 상세 내용 보완 예정</li>
+          </ul>
+        `
+      },
+      beginner: {
+        icon: '🎯',
+        title: '초보자 12주 과정',
+        tags: ['12주 체계', '완전 초보', '골린이'],
+        body: `
+          <p>클럽을 처음 잡는 분을 위한 체계적인 12주 커리큘럼. 어드레스부터 필드 플레이까지 단계별로 배웁니다.</p>
+          <ul>
+            <li>1~2주: TODO</li>
+            <li>3~4주: TODO</li>
+            <li>5~6주: TODO</li>
+            <li>7~12주: TODO</li>
+          </ul>
+          <p style="font-size:13px;color:var(--accent);margin-top:8px">※ 커리큘럼 상세 내용 업데이트 예정</p>
+        `
+      },
+      shortgame: {
+        icon: '⛳',
+        title: '숏게임 레슨',
+        tags: ['어프로치', '퍼팅', '칩샷'],
+        body: `
+          <p>어프로치, 피칭, 칩샷, 퍼팅까지. 그린 주변 실전 감각을 집중적으로 키우는 프로그램입니다.</p>
+          <ul>
+            <li>거리별 어프로치 컨트롤</li>
+            <li>칩샷·피칭 루틴 정립</li>
+            <li>퍼팅 라인 읽기 & 거리감</li>
+            <li>TODO: 상세 내용 보완 예정</li>
+          </ul>
+        `
+      },
+      field: {
+        icon: '🌿',
+        title: '필드 레슨',
+        tags: ['코스 동반', '실전', '중고급'],
+        body: `
+          <p>실제 코스에서 코치와 함께 라운드하며 코스 매니지먼트, 멘탈, 실전 샷을 체득합니다.</p>
+          <ul>
+            <li>코스 매니지먼트 전략</li>
+            <li>실전 상황별 클럽 선택</li>
+            <li>멘탈 관리 & 루틴</li>
+            <li>TODO: 상세 내용 보완 예정</li>
+          </ul>
+        `
+      }
+    };
+
+    const overlay = document.getElementById('drawerOverlay');
+    const drawer  = document.getElementById('programDrawer');
+
+    function openDrawer(key) {
+      const data = PROGRAMS[key];
+      if (!data) return;
+
+      document.getElementById('drawerIcon').textContent  = data.icon;
+      document.getElementById('drawerTitle').textContent = data.title;
+
+      const body = document.getElementById('drawerBody');
+      body.innerHTML = data.body +
+        `<div class="drawer-tags">${data.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
+
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      gtag('event', 'program_drawer_open', { program: key });
+    }
+
+    function closeDrawer() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.program-detail-card[data-program]').forEach(card => {
+      card.addEventListener('click', () => openDrawer(card.dataset.program));
+    });
+
+    overlay.addEventListener('click', closeDrawer);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    // 드로어 내부 스와이프 다운으로 닫기
+    let touchStartY = 0;
+    drawer.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    drawer.addEventListener('touchend', (e) => {
+      if (e.changedTouches[0].clientY - touchStartY > 80) closeDrawer();
+    }, { passive: true });
   </script>
 
 </body>
