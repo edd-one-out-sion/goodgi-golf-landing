@@ -1360,10 +1360,12 @@
       /* sticky CTA 높이만큼 하단 여백 */
       #footer { padding-bottom: 90px; }
 
-      /* 히어로 배경 — 모바일: cover 유지, 상단 기준으로 얼굴 노출 */
+      /* 히어로 배경 — 모바일: 전체 인물 노출 (contain + no-repeat + 다크 배경) */
       .hero-bg {
-        background-size: cover;
-        background-position: center 15%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center 30%;
+        background-color: #070708;
       }
     }
 
