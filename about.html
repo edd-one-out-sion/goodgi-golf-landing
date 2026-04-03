@@ -433,7 +433,7 @@
     ============================================================ */
     .youtube-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 20px;
     }
     .youtube-card {
@@ -1130,57 +1130,77 @@
           </p>
         </div>
 
-        <!-- TODO: 유튜브 영상 선별 후 href/thumbnail/제목 교체 -->
         <div class="youtube-grid">
 
-          <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+          <!-- 서해리 프로 (공치는명훈 채널) -->
+          <a href="https://www.youtube.com/watch?v=WA-NbyKIrbk" target="_blank" rel="noopener"
              class="youtube-card reveal" data-delay="1"
-             onclick="gtag('event','cta_click',{button:'about_youtube_1'})">
+             onclick="gtag('event','cta_click',{button:'about_youtube_seohaeri'})">
             <div class="youtube-thumb">
-              <div class="youtube-thumb-placeholder">영상 썸네일 준비 중</div>
+              <img src="https://img.youtube.com/vi/WA-NbyKIrbk/maxresdefault.jpg"
+                   alt="서해리 프로 레슨 영상" loading="lazy"
+                   onerror="this.style.display='none'" />
               <div class="youtube-play">
-                <svg viewBox="0 0 24 24" fill="white">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
               </div>
             </div>
             <div class="youtube-info">
-              <p class="youtube-title">TODO: 영상 제목</p>
-              <p class="youtube-meta">구찌골프 · YouTube</p>
+              <p class="youtube-title">TODO: 서해리 프로 영상 제목</p>
+              <p class="youtube-meta">서해리 프로 · 공치는명훈</p>
             </div>
           </a>
 
-          <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+          <!-- 김효선 프로 -->
+          <a href="https://www.youtube.com/watch?v=RLdH3VosQoQ" target="_blank" rel="noopener"
              class="youtube-card reveal" data-delay="2"
-             onclick="gtag('event','cta_click',{button:'about_youtube_2'})">
+             onclick="gtag('event','cta_click',{button:'about_youtube_hyoseon'})">
             <div class="youtube-thumb">
-              <div class="youtube-thumb-placeholder">영상 썸네일 준비 중</div>
+              <img src="https://img.youtube.com/vi/RLdH3VosQoQ/maxresdefault.jpg"
+                   alt="백스윙 쉬워지는 3분 레슨" loading="lazy"
+                   onerror="this.style.display='none'" />
               <div class="youtube-play">
-                <svg viewBox="0 0 24 24" fill="white">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
               </div>
             </div>
             <div class="youtube-info">
-              <p class="youtube-title">TODO: 영상 제목</p>
-              <p class="youtube-meta">구찌골프 · YouTube</p>
+              <p class="youtube-title">이래서 백스윙이 어려웠구나... 백스윙 쉬워지는 3분 레슨</p>
+              <p class="youtube-meta">김효선 프로 · 구찌골프TV</p>
             </div>
           </a>
 
-          <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+          <!-- 양정화 프로 -->
+          <a href="https://www.youtube.com/watch?v=Ywnu1k-TUbM" target="_blank" rel="noopener"
              class="youtube-card reveal" data-delay="3"
-             onclick="gtag('event','cta_click',{button:'about_youtube_3'})">
+             onclick="gtag('event','cta_click',{button:'about_youtube_jeonghwa'})">
             <div class="youtube-thumb">
-              <div class="youtube-thumb-placeholder">영상 썸네일 준비 중</div>
+              <img src="https://img.youtube.com/vi/Ywnu1k-TUbM/maxresdefault.jpg"
+                   alt="퍼터 때릴까? 밀까?" loading="lazy"
+                   onerror="this.style.display='none'" />
               <div class="youtube-play">
-                <svg viewBox="0 0 24 24" fill="white">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
               </div>
             </div>
             <div class="youtube-info">
-              <p class="youtube-title">TODO: 영상 제목</p>
-              <p class="youtube-meta">구찌골프 · YouTube</p>
+              <p class="youtube-title">퍼터 때릴까? 밀까? 이걸 몰라서 헷갈렸구나...</p>
+              <p class="youtube-meta">양정화 프로 · 구찌골프TV</p>
+            </div>
+          </a>
+
+          <!-- 조채영 프로 -->
+          <a href="https://www.youtube.com/watch?v=TF1bV4XCeYI" target="_blank" rel="noopener"
+             class="youtube-card reveal" data-delay="4"
+             onclick="gtag('event','cta_click',{button:'about_youtube_chaeyoung'})">
+            <div class="youtube-thumb">
+              <img src="https://img.youtube.com/vi/TF1bV4XCeYI/maxresdefault.jpg"
+                   alt="예쁜 백스윙 궤도 만드는 법" loading="lazy"
+                   onerror="this.style.display='none'" />
+              <div class="youtube-play">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="youtube-info">
+              <p class="youtube-title">프로처럼 예쁜 백스윙 궤도 만드는 법</p>
+              <p class="youtube-meta">조채영 프로 · 구찌골프TV</p>
             </div>
           </a>
 
