@@ -72,6 +72,7 @@
   </script>
 
   <!-- Google Fonts -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet" />
@@ -1270,75 +1271,6 @@
     }
 
 
-    /* ============================================================
-       STUDIO SLIDER
-    ============================================================ */
-    .studio-slider {
-      position: relative;
-    }
-
-    .slider-track {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding-bottom: 4px;
-    }
-
-    .slider-track::-webkit-scrollbar { display: none; }
-
-    .slide-item {
-      flex: 0 0 calc(50% - 8px);
-      scroll-snap-align: start;
-      border-radius: var(--radius);
-      overflow: hidden;
-      aspect-ratio: 4/3;
-    }
-
-    .slide-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .slide-placeholder {
-      width: 100%;
-      height: 100%;
-      background: var(--surface-2);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .slider-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 16px;
-    }
-
-    .slider-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--border);
-      transition: background .2s, width .2s;
-    }
-
-    .slider-dot.active {
-      background: var(--accent);
-      width: 18px;
-      border-radius: 3px;
-    }
-
-    @media (max-width: 768px) {
-      .slide-item { flex: 0 0 85%; }
-    }
 
 
     /* ============================================================
@@ -1723,6 +1655,10 @@
               📞 010-8441-3065
             </a>
           </div>
+          <a href="about.html#curriculum" class="btn btn-secondary" style="margin-top:16px"
+             onclick="gtag('event','cta_click',{button:'programs_about_link'})">
+            초보자 12주 커리큘럼 자세히 보기 →
+          </a>
           <p style="font-size:13px;color:var(--muted)">
             아직 망설여지신다면?&nbsp;
             <a href="https://talk.naver.com/ct/w4590o" target="_blank" rel="noopener"
@@ -1755,7 +1691,7 @@
           <div class="coach-card reveal" data-delay="1">
             <img
               src="assets/images/coaches/coach-01.jpg"
-              alt="코치 사진"
+              alt="양정화 대표"
               class="coach-photo"
               loading="lazy"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -1775,7 +1711,7 @@
           <div class="coach-card reveal" data-delay="2">
             <img
               src="assets/images/coaches/coach-02.jpg"
-              alt="코치 사진"
+              alt="김효선 헤드프로"
               class="coach-photo"
               loading="lazy"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -1795,7 +1731,7 @@
           <div class="coach-card reveal" data-delay="3">
             <img
               src="assets/images/coaches/coach-03.jpg"
-              alt="코치 사진"
+              alt="조채영 메인프로"
               class="coach-photo"
               loading="lazy"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -1815,7 +1751,7 @@
           <div class="coach-card reveal" data-delay="4">
             <img
               src="assets/images/coaches/coach-04.jpg"
-              alt="코치 사진"
+              alt="서해리 메인프로"
               class="coach-photo"
               loading="lazy"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -1849,37 +1785,11 @@
           </div>
         </div>
 
-        <!-- 스튜디오 사진 슬라이더 -->
-        <div class="studio-slider reveal" style="margin-top:40px">
-          <div class="slider-track" id="studioSlider">
-            <!-- TODO: 사진 준비되면 src 교체, 없는 슬라이드는 삭제 -->
-            <div class="slide-item">
-              <div class="slide-placeholder">
-                <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="opacity:.3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 12V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75V17.25A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25V12z"/>
-                </svg>
-                <p style="font-size:12px;color:var(--muted);margin-top:8px">타석 사진 준비 중</p>
-              </div>
-            </div>
-            <div class="slide-item">
-              <div class="slide-placeholder">
-                <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="opacity:.3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 12V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75V17.25A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25V12z"/>
-                </svg>
-                <p style="font-size:12px;color:var(--muted);margin-top:8px">타석 사진 준비 중</p>
-              </div>
-            </div>
-            <div class="slide-item">
-              <div class="slide-placeholder">
-                <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="opacity:.3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 12V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75V17.25A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25V12z"/>
-                </svg>
-                <p style="font-size:12px;color:var(--muted);margin-top:8px">로비 사진 준비 중</p>
-              </div>
-            </div>
-          </div>
-          <!-- 도트 인디케이터 -->
-          <div class="slider-dots" id="sliderDots"></div>
+        <div style="text-align:center;margin-top:32px" class="reveal">
+          <a href="about.html" class="btn btn-secondary"
+             onclick="gtag('event','cta_click',{button:'coaches_about_link'})">
+            레슨 현장 · 코치 상세 소개 보기 →
+          </a>
         </div>
 
       </div>
@@ -2413,9 +2323,11 @@
 
     // ── 폼 유효성 검사 ───────────────────────────────────────────
     const form = document.getElementById('contact-form');
+    let isSubmitting = false;
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (isSubmitting) return;
       let valid = true;
 
       // 이름
@@ -2456,63 +2368,41 @@
 
       // 제출 버튼 로딩
       const submitBtn = document.getElementById('form-submit-btn');
+      isSubmitting = true;
       submitBtn.textContent = '전송 중...';
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.6';
 
-      // TODO: 실제 폼 제출 (Netlify Function 연동 후 활성화)
-      // try {
-      //   const res = await fetch('/.netlify/functions/submit', {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     body: JSON.stringify({
-      //       name: name.value.trim(),
-      //       phone: phone.value.trim(),
-      //       interest: document.getElementById('f-interest').value,
-      //       message: document.getElementById('f-message').value.trim(),
-      //       referrer: document.referrer,
-      //       utm_source: new URLSearchParams(location.search).get('utm_source') || '',
-      //     })
-      //   });
-      //   if (!res.ok) throw new Error();
-      // } catch {
-      //   submitBtn.textContent = '다시 시도해주세요';
-      //   submitBtn.disabled = false;
-      //   submitBtn.style.opacity = '1';
-      //   return;
-      // }
-
-      // 임시: 바로 성공 처리
-      await new Promise(r => setTimeout(r, 800));
+      // Google Apps Script 연동 — 배포 후 SCRIPT_URL 교체
+      const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL'; // TODO: 배포 후 교체
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:       name.value.trim(),
+            phone:      phone.value.trim(),
+            interest:   document.getElementById('f-interest').value,
+            message:    document.getElementById('f-message').value.trim(),
+            referrer:   document.referrer,
+            utm_source: new URLSearchParams(location.search).get('utm_source') || '',
+          })
+        });
+      } catch {
+        isSubmitting = false;
+        submitBtn.textContent = '다시 시도해주세요';
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        return;
+      }
 
       gtag('event', 'form_submit', { form: 'contact' });
 
+      form.reset();
       form.style.display = 'none';
       document.getElementById('form-success').classList.add('visible');
     });
-
-
-    // ── 스튜디오 슬라이더 도트 인디케이터 ───────────────────────
-    (function() {
-      const track = document.getElementById('studioSlider');
-      const dotsWrap = document.getElementById('sliderDots');
-      if (!track || !dotsWrap) return;
-
-      const slides = track.querySelectorAll('.slide-item');
-      slides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-        dotsWrap.appendChild(dot);
-      });
-
-      track.addEventListener('scroll', () => {
-        const index = Math.round(track.scrollLeft / track.offsetWidth);
-        dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === index);
-        });
-      }, { passive: true });
-    })();
-
 
     // ── URL 파라미터로 관심 레슨 preselect ──────────────────────
     (function() {

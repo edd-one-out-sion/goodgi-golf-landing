@@ -34,6 +34,7 @@
   </script>
 
   <!-- Google Fonts -->
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet" />
@@ -248,13 +249,29 @@
       background: var(--surface);
       overflow: hidden;
     }
-    #hero::before {
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/studio-screen-bay-wide.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-bg::after {
       content: '';
       position: absolute;
-      top: -100px; right: -100px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(200,162,74,.12) 0%, transparent 70%);
-      pointer-events: none;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(7,7,8,.90) 0%,
+        rgba(7,7,8,.65) 60%,
+        rgba(7,7,8,.35) 100%
+      );
+    }
+    @media (max-width: 768px) {
+      .hero-bg {
+        background-size: 100% auto;
+        background-position: top center;
+      }
     }
     .hero-eyebrow {
       display: inline-block;
@@ -306,8 +323,6 @@
       color: var(--muted);
       font-size: 13px;
     }
-    /* TODO: 스튜디오 대표 사진으로 교체 */
-
     /* ============================================================
        12주 커리큘럼
     ============================================================ */
@@ -350,8 +365,6 @@
       color: var(--muted);
       line-height: 1.6;
     }
-    /* TODO: 커리큘럼 데이터 수신 후 카드 내용 채우기 */
-
     /* ============================================================
        레슨 프로그램 (상세)
     ============================================================ */
@@ -427,8 +440,6 @@
     .gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
     .gallery-item.tall { grid-row: span 2; aspect-ratio: 1/2; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-    /* TODO: 이미지 선별 후 src 교체 */
-
     /* ============================================================
        유튜브 섹션
     ============================================================ */
@@ -474,8 +485,6 @@
     .youtube-info { padding: 16px; }
     .youtube-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 6px; }
     .youtube-meta { font-size: 12px; color: var(--muted); }
-    /* TODO: 유튜브 영상 선별 후 썸네일/링크 교체 */
-
     /* ============================================================
        미디어 채널 (SNS)
     ============================================================ */
@@ -738,16 +747,33 @@
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       .about-grid, .location-grid { grid-template-columns: 1fr; gap: 32px; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item.wide { grid-column: span 2; }
-      .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
+      .gallery-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 10px;
+        padding-bottom: 4px;
+      }
+      .gallery-grid::-webkit-scrollbar { display: none; }
+      .gallery-item,
+      .gallery-item.wide,
+      .gallery-item.tall {
+        flex: 0 0 72vw;
+        max-width: 280px;
+        aspect-ratio: 4/3;
+        grid-column: unset;
+        grid-row: unset;
+        scroll-snap-align: start;
+      }
       .cta-banner { padding: 40px 24px; }
       #sticky-cta { display: flex; }
       main { padding-bottom: 72px; }
     }
 
     @media (max-width: 480px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
       .media-channels { grid-template-columns: 1fr 1fr; }
     }
   </style>
@@ -799,7 +825,8 @@
          HERO
     ============================================================ -->
     <section id="hero">
-      <div class="container">
+      <div class="hero-bg"></div>
+      <div class="container" style="position:relative;z-index:1">
         <span class="hero-eyebrow reveal">서울 노량진 · 여의도 5분</span>
         <h1 class="hero-title reveal" data-delay="1">
           골프, 처음이어도<br /><em>12주면 충분합니다</em>
@@ -842,13 +869,15 @@
               과학적인 드릴과 루틴으로 빠르게 성장할 수 있도록 돕습니다.
             </p>
             <p>
-              <!-- TODO: 스튜디오 대표 문구 / 비전 추가 -->
+              구찌골프의 모든 코치는 KLPGA·LPGA 정식 자격을 보유한 여성 프로입니다. 단순히 자격증을 가진 것에서 그치지 않고, 트랙맨 데이터를 활용해 스윙의 문제를 수치로 정확하게 진단하고 개인에게 맞는 교정 방향을 설계합니다.
+            </p>
+            <p>
+              레슨은 스튜디오 안에서만 끝나지 않습니다. 실전 숏게임 레슨, 월례회 정기 라운드, 필드 동반 레슨까지 연계해 배운 것을 실제 코스에서 쓸 수 있도록 끝까지 함께합니다. 처음 클럽을 잡는 분은 필드에 나가는 날을 목표로, 이미 치고 있는 분은 코스에서 바로 통하는 실력을 만드는 것이 구찌골프의 방향입니다.
             </p>
           </div>
 
           <div class="about-image reveal" data-delay="2">
-            <!-- TODO: 스튜디오 대표 사진 삽입 -->
-            <span>스튜디오 사진 준비 중</span>
+            <img src="assets/images/studio-lobby.jpg" alt="구찌골프스튜디오 내부" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)" loading="lazy" />
           </div>
 
         </div>
@@ -980,8 +1009,7 @@
             <p class="program-detail-desc">
               실제 코스에서 코치와 함께 라운드하며 코스 매니지먼트,
               멘탈, 실전 샷을 체득합니다.
-              <!-- TODO: 필드 레슨 상세 내용 보완 -->
-            </p>
+</p>
             <div class="program-detail-tags">
               <span class="tag">코스 동반</span>
               <span class="tag">실전</span>
@@ -1009,28 +1037,35 @@
           </p>
         </div>
 
-        <!-- TODO: 이미지 선별 후 src 교체. 현재는 placeholder -->
         <div class="gallery-grid reveal">
           <div class="gallery-item wide">
-            <span>레슨 사진 준비 중</span>
+            <img src="assets/images/field-lesson-01.jpg" alt="외부 필드 레슨" loading="lazy" />
           </div>
           <div class="gallery-item">
-            <span>사진 준비 중</span>
+            <img src="assets/images/studio-screen-bay-front.jpg" alt="스크린 타석" loading="lazy" />
           </div>
           <div class="gallery-item">
-            <span>사진 준비 중</span>
+            <img src="assets/images/studio-trackman-data.jpg" alt="트랙맨 데이터 분석" loading="lazy" />
           </div>
           <div class="gallery-item tall">
-            <span>사진 준비 중</span>
+            <img src="assets/images/studio-putting-green-01.jpg" alt="퍼팅 그린" loading="lazy" />
           </div>
           <div class="gallery-item">
-            <span>사진 준비 중</span>
+            <img src="assets/images/field-lesson-02.jpg" alt="필드 레슨 교정" loading="lazy" />
           </div>
           <div class="gallery-item">
-            <span>사진 준비 중</span>
+            <img src="assets/images/studio-screen-bay-side.jpg" alt="스크린 타석 측면" loading="lazy" />
           </div>
+          <!-- 추가 예정: 필드레슨 퍼팅 잡아주는 사진 -->
+          <div class="gallery-item">
+            <img src="assets/images/field-lesson-03.jpg" alt="외부 레슨 현장" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="assets/images/studio-putting-green-02.jpg" alt="퍼팅 그린 전경" loading="lazy" />
+          </div>
+          <!-- 추가 예정: 구찌골프 월례회 플랜카드 사진 -->
           <div class="gallery-item wide">
-            <span>필드 레슨 사진 준비 중</span>
+            <img src="assets/images/studio-trackman-device.jpg" alt="트랙맨 장비" loading="lazy" />
           </div>
         </div>
 
@@ -1384,6 +1419,10 @@
                onclick="gtag('event','cta_click',{button:'about_cta_kakao'})">
               카카오로 상담하기
             </a>
+            <a href="index-b.html#contact" class="btn btn-tertiary"
+               onclick="gtag('event','cta_click',{button:'about_cta_form'})">
+              문의 남기기
+            </a>
           </div>
         </div>
       </div>
@@ -1539,7 +1578,6 @@
             <li>클럽 패스·페이스 각도·임팩트 데이터 분석</li>
             <li>주차별 드릴 & 과제 제공</li>
             <li>레슨 전후 데이터 비교로 성장 확인</li>
-            <li>TODO: 상세 내용 보완 예정</li>
           </ul>
         `
       },
@@ -1550,12 +1588,13 @@
         body: `
           <p>클럽을 처음 잡는 분을 위한 체계적인 12주 커리큘럼. 어드레스부터 필드 플레이까지 단계별로 배웁니다.</p>
           <ul>
-            <li>1~2주: TODO</li>
-            <li>3~4주: TODO</li>
-            <li>5~6주: TODO</li>
-            <li>7~12주: TODO</li>
+            <li><strong>1~2주</strong> 기초 세팅 & 임팩트 감각 — 그립·어드레스·트랙맨 측정, 똑딱이로 공 맞추는 감각 형성</li>
+            <li><strong>3~4주</strong> 풀스윙 완성 & 아이언 입문 — 하프→풀스윙 확장, 아이언·드라이버 풀스윙 및 정타 훈련</li>
+            <li><strong>5~6주</strong> 방향성 & 숏게임 이론 — 스윙 궤도·페이스 컨트롤, 어프로치·퍼팅 기초</li>
+            <li><strong>7~8주</strong> 실전 아이언 & 비거리 — 유틸리티 클럽 적용, 드라이버 비거리 향상</li>
+            <li><strong>9~10주</strong> 약점 교정 & 코스 전략 — 개인 약점 집중 교정, 클럽 선택 및 필드 운영</li>
+            <li><strong>11~12주</strong> 실전 & 필드 출전 준비 — 야외 숏게임, 전 클럽 점검·시뮬레이션·에티켓 교육</li>
           </ul>
-          <p style="font-size:13px;color:var(--accent);margin-top:8px">※ 커리큘럼 상세 내용 업데이트 예정</p>
         `
       },
       shortgame: {
@@ -1568,7 +1607,7 @@
             <li>거리별 어프로치 컨트롤</li>
             <li>칩샷·피칭 루틴 정립</li>
             <li>퍼팅 라인 읽기 & 거리감</li>
-            <li>TODO: 상세 내용 보완 예정</li>
+            <li>벙커샷 탈출 & 모래 위 어드레스 세팅</li>
           </ul>
         `
       },
@@ -1582,7 +1621,6 @@
             <li>코스 매니지먼트 전략</li>
             <li>실전 상황별 클럽 선택</li>
             <li>멘탈 관리 & 루틴</li>
-            <li>TODO: 상세 내용 보완 예정</li>
           </ul>
         `
       }
