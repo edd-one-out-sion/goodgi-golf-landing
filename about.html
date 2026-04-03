@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>구찌골프 | 초보자 골프 레슨 12주 커리큘럼 · 여의도·노량진</title>
+  <meta name="description" content="골프 처음이라면 구찌골프스튜디오. 초보자 12주 커리큘럼, 필드레슨, 트랙맨 데이터 기반 1:1 맞춤 레슨. 서울 노량진·여의도 5분 거리." />
+
+  <!-- OG -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="구찌골프 | 초보자 골프 레슨 12주 커리큘럼" />
+  <meta property="og:description" content="골프 처음이라면 구찌골프스튜디오. 초보자 12주 커리큘럼, 트랙맨 기반 1:1 맞춤 레슨." />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "구찌골프스튜디오",
+    "alternateName": "GOODGGOLF",
+    "description": "트랙맨 데이터 기반 1:1 맞춤 골프 레슨. 초보자 12주 커리큘럼, 필드레슨 전문. 서울 노량진 위치.",
+    "url": "https://goodggolf.netlify.app",
+    "telephone": "010-8441-3065",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "노량진로 4 대방빌딩 206호",
+      "addressLocality": "동작구",
+      "addressRegion": "서울특별시",
+      "postalCode": "07019",
+      "addressCountry": "KR"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWYRBW4TDB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LWYRBW4TDB');
+  </script>
+
+  <style>
+    /* ============================================================
+       CSS 토큰 (index.html 동일)
+    ============================================================ */
+    :root {
+      --bg:          #070708;
+      --surface:     #0E0E10;
+      --surface-2:   #141418;
+      --text:        #F5F5F6;
+      --muted:       #B3B3B8;
+      --border:      rgba(255,255,255,.10);
+      --accent:      #C8A24A;
+      --accent-2:    #E2C77A;
+      --accent-ink:  #0B0B0C;
+      --radius:      14px;
+      --radius-btn:  12px;
+      --container:   1140px;
+      --section-py:  96px;
+    }
+
+    /* ============================================================
+       리셋 & 기본
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ============================================================
+       타이포
+    ============================================================ */
+    .serif { font-family: 'Playfair Display', 'Noto Serif KR', serif; }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', 'Noto Serif KR', serif;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    /* ============================================================
+       레이아웃
+    ============================================================ */
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+    .section { padding: var(--section-py) 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-title { font-size: clamp(28px, 4vw, 42px); margin-bottom: 16px; }
+    .section-sub { font-size: 17px; color: var(--muted); max-width: 560px; }
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* ============================================================
+       버튼
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      font-size: 15px;
+      font-weight: 600;
+      transition: background .2s, color .2s, border-color .2s, opacity .2s;
+      min-height: 48px;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); }
+    .btn-primary:hover { background: var(--accent-2); }
+    .btn-secondary { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+    .btn-secondary:hover { background: rgba(200,162,74,.12); }
+    .btn-tertiary { background: var(--surface-2); border: 1.5px solid var(--border); color: var(--text); }
+    .btn-tertiary:hover { border-color: rgba(255,255,255,.25); background: #1c1c22; }
+
+    /* ============================================================
+       스크롤 리빌
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+    .reveal[data-delay="1"] { transition-delay: .1s; }
+    .reveal[data-delay="2"] { transition-delay: .2s; }
+    .reveal[data-delay="3"] { transition-delay: .3s; }
+    .reveal[data-delay="4"] { transition-delay: .4s; }
+    .reveal[data-delay="5"] { transition-delay: .5s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(7,7,8,.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+    #header .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .logo span { color: var(--accent); }
+    .nav { display: flex; align-items: center; gap: 32px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { padding: 10px 20px; font-size: 14px; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+
+    /* ============================================================
+       모바일 메뉴
+    ============================================================ */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 24px;
+      z-index: 99;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-nav-link {
+      padding: 12px 8px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      transition: color .2s;
+    }
+    .mobile-nav-link:last-child { border-bottom: none; }
+    .mobile-nav-link:hover { color: var(--text); }
+    .mobile-cta {
+      margin-top: 8px;
+      color: var(--accent);
+      font-weight: 600;
+      border-bottom: none;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,162,74,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-desc {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ============================================================
+       스튜디오 소개 (About)
+    ============================================================ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-text h2 { margin-bottom: 20px; }
+    .about-text p { color: var(--muted); font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-image {
+      aspect-ratio: 4/3;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    /* TODO: 스튜디오 대표 사진으로 교체 */
+
+    /* ============================================================
+       12주 커리큘럼
+    ============================================================ */
+    .curriculum-intro {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .curriculum-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color .2s;
+    }
+    .curriculum-card:hover { border-color: rgba(200,162,74,.4); }
+    .curriculum-week {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .curriculum-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .curriculum-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    /* TODO: 커리큘럼 데이터 수신 후 카드 내용 채우기 */
+
+    /* ============================================================
+       레슨 프로그램 (상세)
+    ============================================================ */
+    .programs-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .program-detail-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+    }
+    .program-detail-icon {
+      width: 48px; height: 48px;
+      background: rgba(200,162,74,.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .program-detail-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .program-detail-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .program-detail-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(200,162,74,.1);
+      color: var(--accent);
+      border: 1px solid rgba(200,162,74,.2);
+    }
+
+    /* ============================================================
+       이미지 갤러리
+    ============================================================ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 8px;
+    }
+    .gallery-item {
+      background: var(--surface-2);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .gallery-item:hover { opacity: .85; }
+    .gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
+    .gallery-item.tall { grid-row: span 2; aspect-ratio: 1/2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    /* TODO: 이미지 선별 후 src 교체 */
+
+    /* ============================================================
+       유튜브 섹션
+    ============================================================ */
+    .youtube-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .youtube-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .youtube-card:hover { border-color: rgba(200,162,74,.4); transform: translateY(-2px); }
+    .youtube-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #111;
+      overflow: hidden;
+    }
+    .youtube-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .youtube-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.3);
+    }
+    .youtube-play svg { width: 48px; height: 48px; opacity: .9; }
+    .youtube-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .youtube-info { padding: 16px; }
+    .youtube-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 6px; }
+    .youtube-meta { font-size: 12px; color: var(--muted); }
+    /* TODO: 유튜브 영상 선별 후 썸네일/링크 교체 */
+
+    /* ============================================================
+       미디어 채널 (SNS)
+    ============================================================ */
+    .media-channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .media-channel-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 32px 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .media-channel-card:hover { border-color: rgba(200,162,74,.4); transform: translateY(-2px); }
+    .media-channel-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-channel-name { font-size: 15px; font-weight: 700; }
+    .media-channel-handle { font-size: 13px; color: var(--muted); }
+
+    /* ============================================================
+       코치 소개
+    ============================================================ */
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .coach-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-align: center;
+    }
+    .coach-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+    .coach-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--surface);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+    }
+    .coach-photo-placeholder svg { width: 40px; height: 40px; }
+    .coach-info { padding: 16px; }
+    .coach-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .coach-role { font-size: 13px; color: var(--accent); }
+
+    /* ============================================================
+       후기
+    ============================================================ */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .review-stars { color: var(--accent); font-size: 14px; margin-bottom: 12px; letter-spacing: 2px; }
+    .review-text { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .review-author { font-size: 13px; font-weight: 600; color: var(--text); }
+    .review-program { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    /* TODO: 실제 후기 내용으로 교체 */
+
+    /* ============================================================
+       위치
+    ============================================================ */
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .location-info h3 { font-size: 18px; margin-bottom: 16px; }
+    .location-detail { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .location-row { display: flex; gap: 12px; font-size: 14px; }
+    .location-row-label { color: var(--muted); min-width: 60px; }
+    .map-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      overflow: hidden;
+    }
+    .map-placeholder iframe { width: 100%; height: 100%; border: none; }
+
+    /* ============================================================
+       CTA 배너
+    ============================================================ */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(200,162,74,.15), rgba(200,162,74,.05));
+      border: 1px solid rgba(200,162,74,.25);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+    }
+    .cta-banner h2 { font-size: clamp(24px, 3.5vw, 38px); margin-bottom: 16px; }
+    .cta-banner p { font-size: 16px; color: var(--muted); max-width: 480px; margin: 0 auto 32px; }
+    .cta-banner-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 56px 0 32px;
+    }
+    .footer-inner { display: flex; flex-direction: column; gap: 40px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .footer-brand p { font-size: 14px; color: var(--muted); margin-top: 12px; line-height: 1.7; }
+    .footer-sns { display: flex; gap: 12px; margin-top: 16px; }
+    .sns-link {
+      width: 36px; height: 36px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: color .2s, border-color .2s;
+    }
+    .sns-link:hover { color: var(--text); border-color: rgba(255,255,255,.25); }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: var(--muted); transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; }
+    .footer-legal { font-size: 12px; color: var(--muted); line-height: 1.8; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.25); margin-top: 8px; }
+
+    /* ============================================================
+       Sticky CTA (모바일)
+    ============================================================ */
+    #sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      gap: 8px;
+    }
+    .sticky-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px;
+      border-radius: var(--radius-btn);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .sticky-btn-call { background: var(--surface-2); border: 1.5px solid var(--border); color: var(--text); }
+    .sticky-btn-kakao { background: #FEE500; color: #3C1E1E; }
+    .sticky-btn-form { background: var(--accent); color: var(--accent-ink); }
+
+    /* ============================================================
+       반응형
+    ============================================================ */
+    @media (max-width: 768px) {
+      :root { --section-py: 64px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .about-grid, .location-grid { grid-template-columns: 1fr; gap: 32px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: span 2; }
+      .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
+      .cta-banner { padding: 40px 24px; }
+      #sticky-cta { display: flex; }
+      main { padding-bottom: 72px; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .media-channels { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header id="header">
+    <div class="container inner">
+      <a href="/" class="logo">GOODG<span>GOLF</span></a>
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="#curriculum">커리큘럼</a></li>
+          <li><a href="#programs">레슨 프로그램</a></li>
+          <li><a href="#coaches">코치 소개</a></li>
+          <li><a href="#media">미디어</a></li>
+          <li><a href="#location">위치</a></li>
+        </ul>
+        <a href="#cta" class="btn btn-primary nav-cta"
+           onclick="gtag('event','cta_click',{button:'about_header_cta'})">
+          체험수업 신청
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 모바일 메뉴 -->
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="#curriculum" class="mobile-nav-link">커리큘럼</a>
+    <a href="#programs" class="mobile-nav-link">레슨 프로그램</a>
+    <a href="#coaches" class="mobile-nav-link">코치 소개</a>
+    <a href="#media" class="mobile-nav-link">미디어</a>
+    <a href="#location" class="mobile-nav-link">위치</a>
+    <a href="#cta" class="mobile-nav-link mobile-cta"
+       onclick="gtag('event','cta_click',{button:'about_mobile_menu_cta'})">
+      체험수업 신청하기 →
+    </a>
+  </nav>
+
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section id="hero">
+      <div class="container">
+        <span class="hero-eyebrow reveal">서울 노량진 · 여의도 5분</span>
+        <h1 class="hero-title reveal" data-delay="1">
+          골프, 처음이어도<br /><em>12주면 충분합니다</em>
+        </h1>
+        <p class="hero-desc reveal" data-delay="2">
+          클럽을 한 번도 잡아본 적 없어도 괜찮습니다.<br />
+          트랙맨 데이터 기반 12주 체계 커리큘럼으로<br />
+          필드에 설 수 있는 실력을 만들어드립니다.
+        </p>
+        <div class="hero-actions reveal" data-delay="3">
+          <a href="#cta" class="btn btn-primary"
+             onclick="gtag('event','cta_click',{button:'about_hero_primary'})">
+            체험수업 신청하기
+          </a>
+          <a href="#curriculum" class="btn btn-secondary">
+            12주 커리큘럼 보기
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         스튜디오 소개
+    ============================================================ -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="about-grid">
+
+          <div class="about-text reveal">
+            <span class="section-label">About</span>
+            <h2 class="section-title">구찌골프스튜디오란?</h2>
+            <p>
+              서울 노량진에 위치한 트랙맨 기반 프리미엄 골프 레슨 스튜디오입니다.
+              여의도·영등포에서 10분 거리, 초보자부터 싱글 핸디캐퍼까지
+              수준에 맞는 1:1 맞춤 레슨을 제공합니다.
+            </p>
+            <p>
+              막연하게 "열심히 하면 되겠지"가 아닌, 데이터로 현재 스윙을 진단하고
+              과학적인 드릴과 루틴으로 빠르게 성장할 수 있도록 돕습니다.
+            </p>
+            <p>
+              <!-- TODO: 스튜디오 대표 문구 / 비전 추가 -->
+            </p>
+          </div>
+
+          <div class="about-image reveal" data-delay="2">
+            <!-- TODO: 스튜디오 대표 사진 삽입 -->
+            <span>스튜디오 사진 준비 중</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         12주 커리큘럼
+    ============================================================ -->
+    <section id="curriculum" class="section" style="background:var(--surface)">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">Curriculum</span>
+          <h2 class="section-title">초보자 12주 커리큘럼</h2>
+        </div>
+
+        <p class="curriculum-intro reveal">
+          클럽을 처음 잡는 날부터 필드에 나가는 날까지.
+          12주 동안 무엇을, 어떤 순서로 배우는지 미리 확인하세요.
+          <!-- TODO: 커리큘럼 소개 문구 보완 -->
+        </p>
+
+        <div class="curriculum-grid">
+
+          <!-- TODO: 커리큘럼 데이터 수신 후 각 카드 내용 채우기 -->
+
+          <div class="curriculum-card reveal" data-delay="1">
+            <p class="curriculum-week">Week 1 – 2</p>
+            <p class="curriculum-title">TODO: 주제명</p>
+            <p class="curriculum-desc">TODO: 내용</p>
+          </div>
+
+          <div class="curriculum-card reveal" data-delay="2">
+            <p class="curriculum-week">Week 3 – 4</p>
+            <p class="curriculum-title">TODO: 주제명</p>
+            <p class="curriculum-desc">TODO: 내용</p>
+          </div>
+
+          <div class="curriculum-card reveal" data-delay="3">
+            <p class="curriculum-week">Week 5 – 6</p>
+            <p class="curriculum-title">TODO: 주제명</p>
+            <p class="curriculum-desc">TODO: 내용</p>
+          </div>
+
+          <div class="curriculum-card reveal" data-delay="4">
+            <p class="curriculum-week">Week 7 – 8</p>
+            <p class="curriculum-title">TODO: 주제명</p>
+            <p class="curriculum-desc">TODO: 내용</p>
+          </div>
+
+          <div class="curriculum-card reveal" data-delay="5">
+            <p class="curriculum-week">Week 9 – 10</p>
+            <p class="curriculum-title">TODO: 주제명</p>
+            <p class="curriculum-desc">TODO: 내용</p>
+          </div>
+
+          <div class="curriculum-card reveal">
+            <p class="curriculum-week">Week 11 – 12</p>
+            <p class="curriculum-title">TODO: 주제명</p>
+            <p class="curriculum-desc">TODO: 내용</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         레슨 프로그램 (상세)
+    ============================================================ -->
+    <section id="programs" class="section">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">Programs</span>
+          <h2 class="section-title">레슨 프로그램</h2>
+          <p class="section-sub">
+            목표와 현재 실력에 맞는 프로그램을 선택하세요.
+          </p>
+        </div>
+
+        <div class="programs-detail-grid">
+
+          <div class="program-detail-card reveal" data-delay="1">
+            <div class="program-detail-icon">🏌️</div>
+            <p class="program-detail-name">스윙 교정 레슨</p>
+            <p class="program-detail-desc">
+              TrackMan 데이터로 현재 스윙의 문제를 정확히 진단하고,
+              개인 맞춤 드릴로 근본적인 교정을 진행합니다.
+            </p>
+            <div class="program-detail-tags">
+              <span class="tag">트랙맨 분석</span>
+              <span class="tag">1:1 맞춤</span>
+              <span class="tag">초중급</span>
+            </div>
+          </div>
+
+          <div class="program-detail-card reveal" data-delay="2">
+            <div class="program-detail-icon">🎯</div>
+            <p class="program-detail-name">초보자 12주 과정</p>
+            <p class="program-detail-desc">
+              클럽을 처음 잡는 분을 위한 체계적인 12주 커리큘럼.
+              어드레스부터 필드 플레이까지 단계별로 배웁니다.
+            </p>
+            <div class="program-detail-tags">
+              <span class="tag">12주 체계</span>
+              <span class="tag">완전 초보</span>
+              <span class="tag">골린이</span>
+            </div>
+          </div>
+
+          <div class="program-detail-card reveal" data-delay="3">
+            <div class="program-detail-icon">⛳</div>
+            <p class="program-detail-name">숏게임 레슨</p>
+            <p class="program-detail-desc">
+              어프로치, 피칭, 칩샷, 퍼팅까지.
+              그린 주변 실전 감각을 집중적으로 키우는 프로그램입니다.
+            </p>
+            <div class="program-detail-tags">
+              <span class="tag">어프로치</span>
+              <span class="tag">퍼팅</span>
+              <span class="tag">칩샷</span>
+            </div>
+          </div>
+
+          <div class="program-detail-card reveal" data-delay="4">
+            <div class="program-detail-icon">🌿</div>
+            <p class="program-detail-name">필드 레슨</p>
+            <p class="program-detail-desc">
+              실제 코스에서 코치와 함께 라운드하며 코스 매니지먼트,
+              멘탈, 실전 샷을 체득합니다.
+              <!-- TODO: 필드 레슨 상세 내용 보완 -->
+            </p>
+            <div class="program-detail-tags">
+              <span class="tag">코스 동반</span>
+              <span class="tag">실전</span>
+              <span class="tag">중고급</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         이미지 갤러리
+    ============================================================ -->
+    <section id="gallery" class="section" style="background:var(--surface)">
+      <div class="container">
+
+        <div class="section-header center reveal">
+          <span class="section-label">Gallery</span>
+          <h2 class="section-title">레슨 현장</h2>
+          <p class="section-sub">
+            실제 레슨 장면과 스튜디오를 확인하세요.
+          </p>
+        </div>
+
+        <!-- TODO: 이미지 선별 후 src 교체. 현재는 placeholder -->
+        <div class="gallery-grid reveal">
+          <div class="gallery-item wide">
+            <span>레슨 사진 준비 중</span>
+          </div>
+          <div class="gallery-item">
+            <span>사진 준비 중</span>
+          </div>
+          <div class="gallery-item">
+            <span>사진 준비 중</span>
+          </div>
+          <div class="gallery-item tall">
+            <span>사진 준비 중</span>
+          </div>
+          <div class="gallery-item">
+            <span>사진 준비 중</span>
+          </div>
+          <div class="gallery-item">
+            <span>사진 준비 중</span>
+          </div>
+          <div class="gallery-item wide">
+            <span>필드 레슨 사진 준비 중</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         코치 소개
+    ============================================================ -->
+    <section id="coaches" class="section">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">Coach</span>
+          <h2 class="section-title">전문 코치 소개</h2>
+        </div>
+
+        <div class="coaches-grid">
+
+          <div class="coach-card reveal" data-delay="1">
+            <img src="assets/images/coaches/coach-01.jpg" alt="양정화 대표" class="coach-photo" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="coach-photo-placeholder">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+            </div>
+            <div class="coach-info">
+              <p class="coach-name">양정화</p>
+              <p class="coach-role">대표</p>
+            </div>
+          </div>
+
+          <div class="coach-card reveal" data-delay="2">
+            <img src="assets/images/coaches/coach-02.jpg" alt="김효선 헤드프로" class="coach-photo" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="coach-photo-placeholder">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+            </div>
+            <div class="coach-info">
+              <p class="coach-name">김효선</p>
+              <p class="coach-role">헤드프로</p>
+            </div>
+          </div>
+
+          <div class="coach-card reveal" data-delay="3">
+            <img src="assets/images/coaches/coach-03.jpg" alt="조채영 메인프로" class="coach-photo" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="coach-photo-placeholder">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+            </div>
+            <div class="coach-info">
+              <p class="coach-name">조채영</p>
+              <p class="coach-role">메인프로</p>
+            </div>
+          </div>
+
+          <div class="coach-card reveal" data-delay="4">
+            <img src="assets/images/coaches/coach-04.jpg" alt="서해리 메인프로" class="coach-photo" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="coach-photo-placeholder">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+            </div>
+            <div class="coach-info">
+              <p class="coach-name">서해리</p>
+              <p class="coach-role">메인프로</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         유튜브 영상
+    ============================================================ -->
+    <section id="media" class="section" style="background:var(--surface)">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">YouTube</span>
+          <h2 class="section-title">레슨 영상</h2>
+          <p class="section-sub">
+            실제 레슨 내용을 영상으로 먼저 확인해보세요.
+          </p>
+        </div>
+
+        <!-- TODO: 유튜브 영상 선별 후 href/thumbnail/제목 교체 -->
+        <div class="youtube-grid">
+
+          <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+             class="youtube-card reveal" data-delay="1"
+             onclick="gtag('event','cta_click',{button:'about_youtube_1'})">
+            <div class="youtube-thumb">
+              <div class="youtube-thumb-placeholder">영상 썸네일 준비 중</div>
+              <div class="youtube-play">
+                <svg viewBox="0 0 24 24" fill="white">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="youtube-info">
+              <p class="youtube-title">TODO: 영상 제목</p>
+              <p class="youtube-meta">구찌골프 · YouTube</p>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+             class="youtube-card reveal" data-delay="2"
+             onclick="gtag('event','cta_click',{button:'about_youtube_2'})">
+            <div class="youtube-thumb">
+              <div class="youtube-thumb-placeholder">영상 썸네일 준비 중</div>
+              <div class="youtube-play">
+                <svg viewBox="0 0 24 24" fill="white">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="youtube-info">
+              <p class="youtube-title">TODO: 영상 제목</p>
+              <p class="youtube-meta">구찌골프 · YouTube</p>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+             class="youtube-card reveal" data-delay="3"
+             onclick="gtag('event','cta_click',{button:'about_youtube_3'})">
+            <div class="youtube-thumb">
+              <div class="youtube-thumb-placeholder">영상 썸네일 준비 중</div>
+              <div class="youtube-play">
+                <svg viewBox="0 0 24 24" fill="white">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="youtube-info">
+              <p class="youtube-title">TODO: 영상 제목</p>
+              <p class="youtube-meta">구찌골프 · YouTube</p>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- 미디어 채널 -->
+        <div style="margin-top:64px">
+          <div class="section-header center reveal">
+            <span class="section-label">Channel</span>
+            <h2 class="section-title" style="font-size:clamp(22px,3vw,32px)">구찌골프 채널</h2>
+          </div>
+
+          <div class="media-channels reveal">
+
+            <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+               class="media-channel-card"
+               onclick="gtag('event','cta_click',{button:'about_channel_youtube'})">
+              <div class="media-channel-icon" style="background:rgba(255,0,0,.1)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="#FF0000">
+                  <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+              <p class="media-channel-name">YouTube</p>
+              <p class="media-channel-handle">@good_ggolf</p>
+            </a>
+
+            <a href="https://www.instagram.com/good_ggolf/" target="_blank" rel="noopener"
+               class="media-channel-card"
+               onclick="gtag('event','cta_click',{button:'about_channel_instagram'})">
+              <div class="media-channel-icon" style="background:rgba(225,48,108,.1)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="#E1306C">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+              </div>
+              <p class="media-channel-name">Instagram</p>
+              <p class="media-channel-handle">@good_ggolf</p>
+            </a>
+
+            <a href="https://m.blog.naver.com/good_ggolf" target="_blank" rel="noopener"
+               class="media-channel-card"
+               onclick="gtag('event','cta_click',{button:'about_channel_blog'})">
+              <div class="media-channel-icon" style="background:rgba(3,199,90,.1)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="#03C75A">
+                  <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
+                </svg>
+              </div>
+              <p class="media-channel-name">네이버 블로그</p>
+              <p class="media-channel-handle">good_ggolf</p>
+            </a>
+
+            <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+               class="media-channel-card"
+               onclick="gtag('event','cta_click',{button:'about_channel_naver_place'})">
+              <div class="media-channel-icon" style="background:rgba(3,199,90,.1)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="#03C75A">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+              </div>
+              <p class="media-channel-name">네이버 플레이스</p>
+              <p class="media-channel-handle">구찌골프스튜디오</p>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         후기
+    ============================================================ -->
+    <section id="reviews" class="section">
+      <div class="container">
+
+        <div class="section-header center reveal">
+          <span class="section-label">Review</span>
+          <h2 class="section-title">수강생 후기</h2>
+        </div>
+
+        <!-- TODO: 실제 후기로 교체 -->
+        <div class="reviews-grid">
+
+          <div class="review-card reveal" data-delay="1">
+            <p class="review-stars">★★★★★</p>
+            <p class="review-text">TODO: 후기 내용</p>
+            <p class="review-author">TODO: 이름</p>
+            <p class="review-program">TODO: 수강 프로그램</p>
+          </div>
+
+          <div class="review-card reveal" data-delay="2">
+            <p class="review-stars">★★★★★</p>
+            <p class="review-text">TODO: 후기 내용</p>
+            <p class="review-author">TODO: 이름</p>
+            <p class="review-program">TODO: 수강 프로그램</p>
+          </div>
+
+          <div class="review-card reveal" data-delay="3">
+            <p class="review-stars">★★★★★</p>
+            <p class="review-text">TODO: 후기 내용</p>
+            <p class="review-author">TODO: 이름</p>
+            <p class="review-program">TODO: 수강 프로그램</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         위치
+    ============================================================ -->
+    <section id="location" class="section" style="background:var(--surface)">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="section-label">Location</span>
+          <h2 class="section-title">위치 · 시설</h2>
+        </div>
+
+        <div class="location-grid">
+
+          <div class="location-info reveal">
+            <h3>구찌골프스튜디오</h3>
+            <div class="location-detail">
+              <div class="location-row">
+                <span class="location-row-label">주소</span>
+                <span>서울특별시 동작구 노량진로 4 대방빌딩 206호</span>
+              </div>
+              <div class="location-row">
+                <span class="location-row-label">전화</span>
+                <span><a href="tel:010-8441-3065">010-8441-3065</a></span>
+              </div>
+              <div class="location-row">
+                <span class="location-row-label">운영시간</span>
+                <span>매일 10:00 – 22:00</span>
+              </div>
+              <div class="location-row">
+                <span class="location-row-label">지하철</span>
+                <span>1·9호선 노량진역 도보 5분<br />5호선 여의도역 차량 10분</span>
+              </div>
+            </div>
+            <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+               class="btn btn-secondary"
+               onclick="gtag('event','cta_click',{button:'about_naver_map'})">
+              네이버 지도에서 보기
+            </a>
+          </div>
+
+          <div class="map-placeholder reveal" data-delay="2">
+            <iframe
+              src="https://map.naver.com/p/entry/place/1612034208?c=15,0,0,0,dh"
+              title="구찌골프스튜디오 지도"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         CTA 배너
+    ============================================================ -->
+    <section id="cta" class="section">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <h2>첫 체험수업, 부담 없이 시작하세요</h2>
+          <p>
+            아직 망설여지신다면 체험수업으로 먼저 확인해보세요.
+            코치와 1:1로 현재 실력을 진단하고 방향을 잡아드립니다.
+          </p>
+          <div class="cta-banner-actions">
+            <a href="tel:010-8441-3065" class="btn btn-primary"
+               onclick="gtag('event','cta_click',{button:'about_cta_call'})">
+              전화로 문의하기
+            </a>
+            <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
+               class="btn btn-secondary"
+               onclick="gtag('event','cta_click',{button:'about_cta_kakao'})">
+              카카오로 상담하기
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="logo">GOODG<span>GOLF</span></a>
+          <p>트랙맨 기반 프리미엄 골프 레슨 스튜디오.<br />서울 노량진에서 여러분의 골프를 바꿔드립니다.</p>
+          <div class="footer-sns">
+            <a href="https://www.youtube.com/@good_ggolf" target="_blank" rel="noopener"
+               class="sns-link" aria-label="YouTube"
+               onclick="gtag('event','cta_click',{button:'about_footer_youtube'})">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/good_ggolf/" target="_blank" rel="noopener"
+               class="sns-link" aria-label="Instagram"
+               onclick="gtag('event','cta_click',{button:'about_footer_instagram'})">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <ul class="footer-links">
+            <li><a href="#curriculum">커리큘럼</a></li>
+            <li><a href="#programs">레슨 프로그램</a></li>
+            <li><a href="#coaches">코치 소개</a></li>
+            <li><a href="#media">미디어</a></li>
+            <li><a href="#location">위치</a></li>
+            <li><a href="/privacy">개인정보처리방침</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-legal">
+          상호: 구찌골프스튜디오 &nbsp;|&nbsp;
+          주소: 서울특별시 동작구 노량진로 4 대방빌딩 206호 &nbsp;|&nbsp;
+          대표: 정현호 &nbsp;|&nbsp;
+          전화: 010-8441-3065
+        </p>
+        <p class="footer-copy">© 2026 GOODGGOLF. All rights reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       STICKY CTA (모바일)
+  ============================================================ -->
+  <div id="sticky-cta" role="navigation" aria-label="빠른 문의">
+    <a href="tel:010-8441-3065" class="sticky-btn sticky-btn-call"
+       onclick="gtag('event','cta_click',{button:'about_sticky_call'})">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+      </svg>
+      전화
+    </a>
+    <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
+       class="sticky-btn sticky-btn-kakao"
+       onclick="gtag('event','cta_click',{button:'about_sticky_kakao'})">
+      카카오
+    </a>
+    <a href="#cta" class="sticky-btn sticky-btn-form"
+       onclick="gtag('event','cta_click',{button:'about_sticky_cta'})">
+      문의
+    </a>
+  </div>
+
+
+  <!-- ============================================================
+       SCRIPTS
+  ============================================================ -->
+  <script>
+    // ── 햄버거 메뉴 ──────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+      }
+    });
+
+
+    // ── 스크롤 리빌 ──────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>
