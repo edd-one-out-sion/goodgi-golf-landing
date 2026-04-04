@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://goodggolf.netlify.app/</loc>
+    <loc>https://goodgi-golf-landing.netlify.app/</loc>
     <lastmod>2026-04-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://goodggolf.netlify.app/about</loc>
+    <loc>https://goodgi-golf-landing.netlify.app/about</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://goodggolf.netlify.app/privacy</loc>
+    <loc>https://goodgi-golf-landing.netlify.app/privacy</loc>
     <lastmod>2026-04-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
