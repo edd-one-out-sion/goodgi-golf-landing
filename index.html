@@ -2385,22 +2385,21 @@
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.6';
 
-      // Google Apps Script 연동 — 배포 후 SCRIPT_URL 교체
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJpi8Z9vYdXLP1jc7r9b1Tc8840DaL5WmdoJVEW_BIyRcgGte3HoaGQJv-5N78Xkx8ZQ/exec';
+      const API_URL = 'https://railway-admin-production.up.railway.app/api/inquiries';
       try {
-        await fetch(SCRIPT_URL, {
+        const res = await fetch(API_URL, {
           method: 'POST',
-          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name:       name.value.trim(),
-            phone:      phone.value.trim(),
-            interest:   document.getElementById('f-interest').value,
-            message:    document.getElementById('f-message').value.trim(),
-            referrer:   document.referrer,
-            utm_source: new URLSearchParams(location.search).get('utm_source') || '',
+            name:        name.value.trim(),
+            phone:       phone.value.trim(),
+            lesson_type: document.getElementById('f-interest').value,
+            message:     document.getElementById('f-message').value.trim(),
+            referrer:    document.referrer,
+            utm_source:  new URLSearchParams(location.search).get('utm_source') || '',
           })
         });
+        if (!res.ok) throw new Error('서버 오류');
       } catch {
         isSubmitting = false;
         submitBtn.textContent = '다시 시도해주세요';

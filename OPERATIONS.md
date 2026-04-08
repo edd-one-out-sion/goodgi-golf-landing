@@ -1,6 +1,6 @@
 # 구찌골프 랜딩페이지 — 운영 가이드
 
-최종 업데이트: 2026-04-04
+최종 업데이트: 2026-04-08
 
 ---
 
@@ -20,11 +20,12 @@
 |---|---|---|
 | GA4 | 동생 개인 계정 | `G-MVYS57N74L` |
 | GTM | 동생 개인 계정 | `GTM-K2TSSMZ8` |
-| 구글 시트 | 동생 개인 계정 | Apps Script URL 별도 보관 |
 | 구글 서치콘솔 | 동생 개인 계정 | GTM 소유권 자동 확인 완료 |
 | 네이버 서치어드바이저 | 미등록 (예정) | — |
+| Railway (백엔드+DB) | — | https://railway-admin-production.up.railway.app |
+| Railway GitHub | — | https://github.com/edd-one-out-sion/railway-admin |
 
-> 센터 구글 계정 살아나면 GA4/GTM/시트/서치콘솔 모두 관리자 권한 추가 가능
+> 센터 구글 계정 살아나면 GA4/GTM/서치콘솔 모두 관리자 권한 추가 가능
 
 ---
 
@@ -40,13 +41,13 @@ Netlify가 자동으로 감지해서 1~2분 내 배포 완료.
 
 ---
 
-## 구글 시트 문의 데이터
+## 문의 데이터 — Railway DB
 
-- 폼 제출 시 자동으로 시트에 저장됨
-- 직원 공유: 시트 우상단 **공유** → 이메일 입력 → 편집자 권한
-- 컬럼 구조: `타임스탬프 / 이름 / 연락처 / 관심레슨 / 문의내용 / 유입경로 / UTM소스`
-- 유입경로: 방문자가 어디서 왔는지 자동 기록 (네이버 검색 → `naver.com` 등)
-- UTM소스: 광고 링크에 `?utm_source=instagram` 붙이면 자동 기록
+- 폼 제출 시 Railway PostgreSQL에 저장 (구글시트 → Railway로 전환 완료)
+- Railway 프로젝트: `fantastic-kindness`
+- 테이블: `inquiries` (id, name, phone, lesson_type, message, referrer, utm_source, status, created_at)
+- 상태값: `신규` / `확인` / `처리완료`
+- admin 계정: username=`admin`, password=`admin1234`
 
 ---
 
@@ -81,9 +82,18 @@ node scripts/convert-webp.mjs
 
 ## 남은 작업
 
-- [ ] 배포된 사이트에서 폼 테스트 (로컬 말고 실제 URL에서)
+### 관리자 페이지 (우선순위 높음)
+- [ ] 관리자 로그인 페이지 HTML 제작
+- [ ] 문의 목록 대시보드 HTML 제작 (상태 필터 + 상태 변경 기능)
+- [ ] Netlify 또는 별도 URL로 배포
+
+### 랜딩페이지
+- [x] 폼 → Railway API 연결 (index.html 수정 완료, 배포 필요)
+- [ ] 배포 후 실제 폼 제출 테스트
+
+### 기타
 - [ ] 네이버 서치어드바이저 등록
-- [ ] 센터 구글 계정 복구 후 GA4/GTM/시트 관리자 권한 추가
+- [ ] 센터 구글 계정 복구 후 GA4/GTM/서치콘솔 관리자 권한 추가
 - [ ] 도메인 변경 시 → 서치콘솔/어드바이저에 새 속성 추가, sitemap.xml URL 수정
 
 ---
