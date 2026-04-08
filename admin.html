@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>구찌골프 ADMIN</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #191a1a;
+      --surface-high: #1f2020;
+      --surface-highest: #252626;
+      --border: #2a2b2b;
+      --text: #e7e5e5;
+      --text-muted: #acabaa;
+      --primary: #c6c6c7;
+      --sidebar-w: 220px;
+
+      --badge-new-bg: #7f2927;
+      --badge-new-text: #ff9993;
+      --badge-check-bg: #3a3500;
+      --badge-check-text: #ffe066;
+      --badge-done-bg: #006834;
+      --badge-done-text: #c3ffcd;
+    }
+
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ─────────────────────────────── */
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .login-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .login-box h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .login-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: var(--surface-highest);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn-login {
+      width: 100%;
+      background: var(--primary);
+      color: #1a1a1a;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.15s;
+    }
+
+    .btn-login:hover { opacity: 0.85; }
+
+    .login-error {
+      color: #ff9993;
+      font-size: 13px;
+      margin-top: 12px;
+      text-align: center;
+      display: none;
+    }
+
+    /* ── LAYOUT ────────────────────────────── */
+    #app { display: none; min-height: 100vh; }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: #111212;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      padding: 0 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-logo strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .sidebar-logo span {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .nav-item:hover { color: var(--text); background: var(--surface); }
+
+    .nav-item.active {
+      color: var(--text);
+      border-left-color: var(--primary);
+      background: var(--surface);
+    }
+
+    .nav-item.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .nav-item .icon { font-size: 15px; }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-logout {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.15s;
+    }
+
+    .btn-logout:hover { color: var(--text); border-color: var(--text-muted); }
+
+    .main {
+      margin-left: var(--sidebar-w);
+      padding: 40px 36px;
+      min-height: 100vh;
+    }
+
+    /* ── INQUIRY PAGE ──────────────────────── */
+    .page-header {
+      margin-bottom: 28px;
+    }
+
+    .page-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .page-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--surface-high);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 7px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover { color: var(--text); }
+
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #1a1a1a;
+      font-weight: 700;
+    }
+
+    /* ── TABLE (PC) ────────────────────────── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      background: var(--surface);
+      padding: 12px 16px;
+      text-align: left;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-top: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+
+    tbody tr:hover { background: var(--surface-high); }
+
+    tbody td {
+      padding: 14px 16px;
+      vertical-align: top;
+      color: var(--text);
+    }
+
+    .td-message {
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .td-date { color: var(--text-muted); font-size: 12px; white-space: nowrap; }
+    .td-phone { white-space: nowrap; }
+    .td-phone a { color: var(--text); text-decoration: none; }
+    .td-phone a:hover { color: var(--primary); }
+
+    /* ── BADGES ────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-new { background: var(--badge-new-bg); color: var(--badge-new-text); }
+    .badge-check { background: var(--badge-check-bg); color: var(--badge-check-text); }
+    .badge-done { background: var(--badge-done-bg); color: var(--badge-done-text); }
+
+    /* ── STATUS SELECT ─────────────────────── */
+    .status-select {
+      background: var(--surface-highest);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* ── MOBILE CARDS ──────────────────────── */
+    .cards { display: none; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      cursor: pointer;
+      gap: 12px;
+    }
+
+    .card-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .card-name {
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .card-lesson {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-chevron {
+      color: var(--text-muted);
+      font-size: 18px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .card.open .card-chevron { transform: rotate(180deg); }
+
+    .card-body {
+      display: none;
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card.open .card-body { display: block; }
+
+    .card-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 14px;
+    }
+
+    .card-row label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .card-row .value {
+      font-size: 14px;
+    }
+
+    .btn-call {
+      display: block;
+      width: 100%;
+      background: var(--primary);
+      color: #1a1a1a;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-top: 16px;
+    }
+
+    .card-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+
+    /* ── COMING SOON ───────────────────────── */
+    .coming-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 40vh;
+      color: var(--text-muted);
+      gap: 12px;
+    }
+
+    .coming-soon .icon-big { font-size: 48px; opacity: 0.3; }
+    .coming-soon p { font-size: 14px; }
+
+    /* ── LOADING / EMPTY ───────────────────── */
+    .state-msg {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* ── RESPONSIVE ────────────────────────── */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 0; }
+
+      /* mobile top bar */
+      .mobile-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px 12px;
+        border-bottom: 1px solid var(--border);
+        background: #111212;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .mobile-topbar strong { font-size: 15px; letter-spacing: 0.05em; }
+
+      .mobile-content { padding: 16px; }
+
+      .table-wrap { display: none; }
+      .cards { display: block; }
+
+      .page-header h2 { font-size: 18px; }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-topbar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>구찌골프 ADMIN</h1>
+    <p>관리자 계정으로 로그인하세요.</p>
+    <div class="form-group">
+      <label>아이디</label>
+      <input type="text" id="username" placeholder="admin" autocomplete="username" />
+    </div>
+    <div class="form-group">
+      <label>비밀번호</label>
+      <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+    </div>
+    <button class="btn-login" id="btn-login">로그인</button>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<!-- ══ APP ════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- 모바일 상단바 -->
+  <div class="mobile-topbar">
+    <strong>구찌골프 ADMIN</strong>
+    <button class="btn-logout" onclick="logout()" style="width:auto;padding:6px 12px">로그아웃</button>
+  </div>
+
+  <!-- 사이드바 -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <strong>구찌골프 ADMIN</strong>
+      <span>GOLF ACADEMY</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="showPage('inquiries')">
+        <span class="icon">📋</span> 문의 관리
+      </div>
+      <div class="nav-item disabled">
+        <span class="icon">📸</span> 현장사진 관리
+      </div>
+      <div class="nav-item disabled">
+        <span class="icon">⭐</span> 수강생 후기 관리
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="logout()">로그아웃</button>
+    </div>
+  </aside>
+
+  <!-- 메인 -->
+  <main class="main">
+    <!-- 문의 관리 -->
+    <div id="page-inquiries">
+      <div class="page-header">
+        <h2>문의 관리</h2>
+        <p>체험수업 및 레슨 문의를 확인하고 상태를 관리합니다.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="전체">전체</button>
+        <button class="filter-btn" data-filter="신규">신규</button>
+        <button class="filter-btn" data-filter="확인">확인</button>
+        <button class="filter-btn" data-filter="처리완료">처리완료</button>
+      </div>
+
+      <!-- PC 테이블 -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>이름</th>
+              <th>연락처</th>
+              <th>레슨종류</th>
+              <th>문의내용</th>
+              <th>접수일시</th>
+              <th>상태</th>
+              <th>변경</th>
+            </tr>
+          </thead>
+          <tbody id="inquiry-table-body">
+            <tr><td colspan="8" class="state-msg">불러오는 중...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 모바일 카드 -->
+      <div class="cards" id="inquiry-cards">
+        <div class="state-msg">불러오는 중...</div>
+      </div>
+    </div>
+
+    <!-- 현장사진 / 후기 (준비중) -->
+    <div id="page-photos" style="display:none">
+      <div class="coming-soon">
+        <div class="icon-big">📸</div>
+        <p>현장사진 관리 — 준비중입니다.</p>
+      </div>
+    </div>
+    <div id="page-reviews" style="display:none">
+      <div class="coming-soon">
+        <div class="icon-big">⭐</div>
+        <p>수강생 후기 관리 — 준비중입니다.</p>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script>
+  const API = 'https://railway-admin-production.up.railway.app';
+  let allInquiries = [];
+  let currentFilter = '전체';
+
+  // ── 초기화 ──────────────────────────────────────────────
+  const token = localStorage.getItem('admin_token');
+  if (token) showApp();
+
+  // ── 로그인 ──────────────────────────────────────────────
+  document.getElementById('btn-login').addEventListener('click', login);
+  document.getElementById('password').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
+  });
+
+  async function login() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+
+    try {
+      const res = await fetch(`${API}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || '로그인 실패');
+      localStorage.setItem('admin_token', data.token);
+      showApp();
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.style.display = 'block';
+    }
+  }
+
+  function showApp() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadInquiries();
+  }
+
+  function logout() {
+    localStorage.removeItem('admin_token');
+    location.reload();
+  }
+
+  // ── 페이지 전환 ─────────────────────────────────────────
+  function showPage(name) {
+    ['inquiries', 'photos', 'reviews'].forEach(p => {
+      document.getElementById(`page-${p}`).style.display = p === name ? 'block' : 'none';
+    });
+    document.querySelectorAll('.nav-item:not(.disabled)').forEach(el => {
+      el.classList.toggle('active', el.textContent.trim().startsWith(
+        name === 'inquiries' ? '📋' : name === 'photos' ? '📸' : '⭐'
+      ));
+    });
+  }
+
+  // ── 문의 불러오기 ────────────────────────────────────────
+  async function loadInquiries() {
+    try {
+      const res = await fetch(`${API}/api/inquiries`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('admin_token')}` }
+      });
+      if (res.status === 401) { logout(); return; }
+      allInquiries = await res.json();
+      renderInquiries();
+    } catch {
+      document.getElementById('inquiry-table-body').innerHTML =
+        '<tr><td colspan="8" class="state-msg">데이터를 불러오지 못했습니다.</td></tr>';
+      document.getElementById('inquiry-cards').innerHTML =
+        '<div class="state-msg">데이터를 불러오지 못했습니다.</div>';
+    }
+  }
+
+  // ── 필터 ────────────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderInquiries();
+    });
+  });
+
+  function filtered() {
+    if (currentFilter === '전체') return allInquiries;
+    return allInquiries.filter(i => i.status === currentFilter);
+  }
+
+  // ── 렌더 ────────────────────────────────────────────────
+  function renderInquiries() {
+    const data = filtered();
+    renderTable(data);
+    renderCards(data);
+  }
+
+  function badgeClass(status) {
+    if (status === '신규') return 'badge-new';
+    if (status === '확인') return 'badge-check';
+    return 'badge-done';
+  }
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('inquiry-table-body');
+    if (!data.length) {
+      tbody.innerHTML = '<tr><td colspan="8" class="state-msg">문의가 없습니다.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.map(i => `
+      <tr>
+        <td style="color:var(--text-muted);font-size:12px">${i.id}</td>
+        <td style="font-weight:600">${i.name || '-'}</td>
+        <td class="td-phone"><a href="tel:${i.phone}">${i.phone || '-'}</a></td>
+        <td style="font-size:12px">${i.lesson_type || '-'}</td>
+        <td class="td-message" title="${(i.message||'').replace(/"/g,'&quot;')}">${i.message || '-'}</td>
+        <td class="td-date">${formatDate(i.created_at)}</td>
+        <td><span class="badge ${badgeClass(i.status)}">${i.status}</span></td>
+        <td>
+          <select class="status-select" onchange="changeStatus(${i.id}, this.value)">
+            <option ${i.status==='신규'?'selected':''}>신규</option>
+            <option ${i.status==='확인'?'selected':''}>확인</option>
+            <option ${i.status==='처리완료'?'selected':''}>처리완료</option>
+          </select>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function renderCards(data) {
+    const container = document.getElementById('inquiry-cards');
+    if (!data.length) {
+      container.innerHTML = '<div class="state-msg">문의가 없습니다.</div>';
+      return;
+    }
+    container.innerHTML = data.map(i => `
+      <div class="card" id="card-${i.id}">
+        <div class="card-header" onclick="toggleCard(${i.id})">
+          <div class="card-header-left">
+            <span class="badge ${badgeClass(i.status)}">${i.status}</span>
+            <div>
+              <div class="card-name">${i.name || '-'}</div>
+              <div class="card-lesson">${i.lesson_type || '레슨종류 없음'}</div>
+            </div>
+          </div>
+          <span class="card-chevron">⌄</span>
+        </div>
+        <div class="card-body">
+          <div class="card-row">
+            <label>문의내용</label>
+            <div class="value" style="color:var(--text-muted);font-size:13px;line-height:1.6">${i.message || '-'}</div>
+          </div>
+          <div class="card-row">
+            <label>접수일시</label>
+            <div class="value" style="font-size:13px;color:var(--text-muted)">${formatDate(i.created_at)}</div>
+          </div>
+          <div class="card-status-row">
+            <label style="font-size:11px;color:var(--text-muted)">상태 변경</label>
+            <select class="status-select" onchange="changeStatus(${i.id}, this.value)">
+              <option ${i.status==='신규'?'selected':''}>신규</option>
+              <option ${i.status==='확인'?'selected':''}>확인</option>
+              <option ${i.status==='처리완료'?'selected':''}>처리완료</option>
+            </select>
+          </div>
+          <a href="tel:${i.phone}" class="btn-call">📞 ${i.phone || '연락처 없음'} 전화하기</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function toggleCard(id) {
+    const card = document.getElementById(`card-${id}`);
+    card.classList.toggle('open');
+  }
+
+  // ── 상태 변경 ────────────────────────────────────────────
+  async function changeStatus(id, status) {
+    try {
+      const res = await fetch(`${API}/api/inquiries/${id}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: JSON.stringify({ status })
+      });
+      if (!res.ok) throw new Error();
+      // 로컬 데이터 업데이트
+      const item = allInquiries.find(i => i.id === id);
+      if (item) { item.status = status; renderInquiries(); }
+    } catch {
+      alert('상태 변경에 실패했습니다. 다시 시도해주세요.');
+    }
+  }
+</script>
+</body>
+</html>
