@@ -326,6 +326,32 @@
       cursor: pointer;
     }
 
+    .btn-delete {
+      background: none;
+      border: none;
+      color: #7f2927;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .btn-delete:hover { background: #3a1010; }
+
+    .btn-delete-card {
+      display: block;
+      width: 100%;
+      background: none;
+      border: 1px solid #7f2927;
+      color: #ff9993;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
     /* ── MOBILE CARDS ──────────────────────── */
     .cards { display: none; }
 
@@ -557,6 +583,7 @@
               <th>접수일시</th>
               <th>상태</th>
               <th>변경</th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="inquiry-table-body">
@@ -720,6 +747,7 @@
             <option ${i.status==='처리완료'?'selected':''}>처리완료</option>
           </select>
         </td>
+        <td><button class="btn-delete" onclick="deleteInquiry(${i.id})" title="삭제">🗑</button></td>
       </tr>
     `).join('');
   }
@@ -760,6 +788,7 @@
             </select>
           </div>
           <a href="tel:${i.phone}" class="btn-call">📞 ${i.phone || '연락처 없음'} 전화하기</a>
+          <button class="btn-delete-card" onclick="deleteInquiry(${i.id})">🗑 삭제</button>
         </div>
       </div>
     `).join('');
@@ -768,6 +797,22 @@
   function toggleCard(id) {
     const card = document.getElementById(`card-${id}`);
     card.classList.toggle('open');
+  }
+
+  // ── 삭제 ────────────────────────────────────────────────
+  async function deleteInquiry(id) {
+    if (!confirm('이 문의를 삭제할까요?')) return;
+    try {
+      const res = await fetch(`${API}/api/inquiries/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem('admin_token')}` }
+      });
+      if (!res.ok) throw new Error();
+      allInquiries = allInquiries.filter(i => i.id !== id);
+      renderInquiries();
+    } catch {
+      alert('삭제에 실패했습니다. 다시 시도해주세요.');
+    }
   }
 
   // ── 상태 변경 ────────────────────────────────────────────
