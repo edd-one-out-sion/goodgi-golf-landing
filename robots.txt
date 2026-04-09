@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
-Sitemap: https://goodgi-golf-landing.netlify.app/sitemap.xml
+Sitemap: https://goodggolf.com/sitemap.xml
