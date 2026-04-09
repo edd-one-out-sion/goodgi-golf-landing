@@ -18,14 +18,14 @@
 
 | 서비스 | 계정 | ID / URL |
 |---|---|---|
+| Netlify | 본인 계정 | https://goodggolf.com (자동배포) |
+| Cloudinary | 본인 계정 | cloud: `dxgxhzxkx` / preset: `goodgi_upload` |
 | GA4 | 동생 개인 계정 | `G-MVYS57N74L` |
 | GTM | 동생 개인 계정 | `GTM-K2TSSMZ8` |
-| 구글 서치콘솔 | 동생 개인 계정 | GTM 소유권 자동 확인 완료 |
-| 네이버 서치어드바이저 | 동생 개인 계정 | 메타 태그 등록 완료 |
-| Railway (백엔드+DB) | — | https://railway-admin-production.up.railway.app |
-| Railway GitHub | — | https://github.com/edd-one-out-sion/railway-admin |
-
-> 센터 구글 계정 살아나면 GA4/GTM/서치콘솔 모두 관리자 권한 추가 가능
+| 구글 서치콘솔 | 동생 개인 계정 | goodggolf.com 속성 등록 완료 |
+| 네이버 서치어드바이저 | 동생 개인 계정 | goodggolf.com 등록 완료 |
+| Railway (백엔드+DB) | 본인 계정 | https://railway-admin-production.up.railway.app |
+| Railway GitHub | 본인 계정 | https://github.com/edd-one-out-sion/railway-admin |
 
 ---
 
