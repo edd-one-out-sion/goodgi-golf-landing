@@ -85,11 +85,11 @@ node scripts/convert-webp.mjs
 
 ## 남은 작업
 
-### 이미지/후기 관리 (강사 논의 후 진행)
-- [ ] 이미지 저장소 결정 — GCS(동생 계정 확인 필요) or Cloudinary
-- [ ] 현장사진 관리 — Railway DB `photos` 테이블 + 어드민 UI
-- [ ] 수강생 후기 관리 — Railway DB `reviews` 테이블 + 어드민 UI
-- [ ] 랜딩페이지 현장사진/후기 섹션 → DB에서 동적으로 불러오도록 수정
+### 이미지/후기 관리
+- [x] 이미지 저장소 결정 — Cloudinary (본인 계정, cloud: dxgxhzxkx, preset: goodgi_upload)
+- [x] 현장사진 관리 — Railway DB `photos` 테이블 + 어드민 UI
+- [x] 수강생 후기 관리 — Railway DB `reviews` 테이블 + 어드민 UI
+- [x] 랜딩페이지 현장사진/후기 섹션 → DB에서 동적으로 불러오도록 수정
 
 ### 기타
 - [ ] 센터 구글 계정 복구 후 GA4/GTM/서치콘솔 관리자 권한 추가
