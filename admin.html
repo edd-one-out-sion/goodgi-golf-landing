@@ -484,19 +484,194 @@
       margin-top: 14px;
     }
 
-    /* ── COMING SOON ───────────────────────── */
-    .coming-soon {
+    /* ── PHOTOS PAGE ────────────────────────── */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 40px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 28px;
+    }
+
+    .upload-zone:hover, .upload-zone.drag-over {
+      border-color: var(--primary);
+      background: var(--surface-high);
+    }
+
+    .upload-zone input[type="file"] { display: none; }
+
+    .upload-zone .upload-icon { font-size: 36px; margin-bottom: 10px; opacity: 0.5; }
+
+    .upload-zone p { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+
+    .upload-zone small { font-size: 12px; color: var(--text-muted); opacity: 0.6; }
+
+    .upload-progress {
+      display: none;
+      background: var(--surface-high);
+      border-radius: 6px;
+      height: 4px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .upload-progress-bar {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .photo-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface-high);
+      aspect-ratio: 4/3;
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 40vh;
-      color: var(--text-muted);
-      gap: 12px;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.15s;
     }
 
-    .coming-soon .icon-big { font-size: 48px; opacity: 0.3; }
-    .coming-soon p { font-size: 14px; }
+    .photo-item:hover .photo-item-overlay { opacity: 1; }
+
+    .btn-photo-delete {
+      background: #7f2927;
+      border: none;
+      color: #ff9993;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .photo-caption {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 0 8px;
+    }
+
+    /* ── REVIEWS PAGE ───────────────────────── */
+    .review-add-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .review-add-form h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .review-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .review-form-grid input, .review-add-form textarea {
+      width: 100%;
+      background: var(--surface-highest);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .review-add-form textarea {
+      resize: vertical;
+      min-height: 80px;
+      margin-bottom: 12px;
+    }
+
+    .review-form-grid input:focus, .review-add-form textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .btn-add-review {
+      background: var(--primary);
+      border: none;
+      color: #1a1a1a;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .btn-add-review:hover { opacity: 0.85; }
+
+    .review-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .review-item-body { flex: 1; min-width: 0; }
+
+    .review-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .review-item-author { font-size: 14px; font-weight: 700; }
+
+    .review-item-source { font-size: 12px; color: var(--text-muted); }
+
+    .review-item-content {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .review-form-grid { grid-template-columns: 1fr; }
+      .review-item { flex-direction: column; }
+    }
 
     /* ── LOADING / EMPTY ───────────────────── */
     .state-msg {
@@ -578,10 +753,10 @@
       <div class="nav-item active" onclick="showPage('inquiries')">
         <span class="icon">📋</span> 문의 관리
       </div>
-      <div class="nav-item disabled">
+      <div class="nav-item" onclick="showPage('photos')">
         <span class="icon">📸</span> 현장사진 관리
       </div>
-      <div class="nav-item disabled">
+      <div class="nav-item" onclick="showPage('reviews')">
         <span class="icon">⭐</span> 수강생 후기 관리
       </div>
     </nav>
@@ -635,17 +810,48 @@
       </div>
     </div>
 
-    <!-- 현장사진 / 후기 (준비중) -->
+    <!-- 현장사진 관리 -->
     <div id="page-photos" style="display:none">
-      <div class="coming-soon">
-        <div class="icon-big">📸</div>
-        <p>현장사진 관리 — 준비중입니다.</p>
+      <div class="page-header">
+        <h2>현장사진 관리</h2>
+        <p>랜딩페이지 갤러리에 표시될 현장사진을 업로드하고 관리합니다.</p>
+      </div>
+
+      <label class="upload-zone" id="upload-zone">
+        <input type="file" id="photo-file-input" accept="image/*" multiple />
+        <div class="upload-icon">📸</div>
+        <p>클릭하거나 이미지를 드래그해서 업로드</p>
+        <small>JPG, PNG, WEBP · 최대 10MB</small>
+        <div class="upload-progress" id="upload-progress">
+          <div class="upload-progress-bar" id="upload-progress-bar"></div>
+        </div>
+      </label>
+
+      <div id="photo-grid-wrap">
+        <div class="state-msg" id="photo-state">불러오는 중...</div>
+        <div class="photo-grid" id="photo-grid"></div>
       </div>
     </div>
+
+    <!-- 수강생 후기 관리 -->
     <div id="page-reviews" style="display:none">
-      <div class="coming-soon">
-        <div class="icon-big">⭐</div>
-        <p>수강생 후기 관리 — 준비중입니다.</p>
+      <div class="page-header">
+        <h2>수강생 후기 관리</h2>
+        <p>랜딩페이지에 표시될 수강생 후기를 추가하고 관리합니다.</p>
+      </div>
+
+      <div class="review-add-form">
+        <h3>후기 추가</h3>
+        <div class="review-form-grid">
+          <input type="text" id="review-author" placeholder="작성자 (예: han****)">
+          <input type="text" id="review-source" placeholder="출처 (예: 네이버 플레이스 리뷰)">
+        </div>
+        <textarea id="review-content" placeholder="후기 내용을 입력하세요..."></textarea>
+        <button class="btn-add-review" onclick="addReview()">후기 추가</button>
+      </div>
+
+      <div class="review-list" id="review-list">
+        <div class="state-msg">불러오는 중...</div>
       </div>
     </div>
   </main>
@@ -705,11 +911,12 @@
     ['inquiries', 'photos', 'reviews'].forEach(p => {
       document.getElementById(`page-${p}`).style.display = p === name ? 'block' : 'none';
     });
-    document.querySelectorAll('.nav-item:not(.disabled)').forEach(el => {
-      el.classList.toggle('active', el.textContent.trim().startsWith(
-        name === 'inquiries' ? '📋' : name === 'photos' ? '📸' : '⭐'
-      ));
+    document.querySelectorAll('.nav-item').forEach(el => {
+      const icon = name === 'inquiries' ? '📋' : name === 'photos' ? '📸' : '⭐';
+      el.classList.toggle('active', el.textContent.trim().startsWith(icon));
     });
+    if (name === 'photos') loadPhotos();
+    if (name === 'reviews') loadReviews();
   }
 
   // ── 문의 불러오기 ────────────────────────────────────────
@@ -897,11 +1104,205 @@
         body: JSON.stringify({ status })
       });
       if (!res.ok) throw new Error();
-      // 로컬 데이터 업데이트
       const item = allInquiries.find(i => i.id === id);
       if (item) { item.status = status; renderInquiries(); }
     } catch {
       alert('상태 변경에 실패했습니다. 다시 시도해주세요.');
+    }
+  }
+
+  // ══ 현장사진 ════════════════════════════════════════════
+
+  const CLOUDINARY_CLOUD = 'dxgxhzxkx';
+  const CLOUDINARY_PRESET = 'goodgi_upload';
+
+  let allPhotos = [];
+
+  // 업로드존 이벤트
+  const uploadZone = document.getElementById('upload-zone');
+  const fileInput = document.getElementById('photo-file-input');
+
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag-over');
+    handleFiles(Array.from(e.dataTransfer.files));
+  });
+  fileInput.addEventListener('change', () => handleFiles(Array.from(fileInput.files)));
+
+  async function handleFiles(files) {
+    const images = files.filter(f => f.type.startsWith('image/'));
+    if (!images.length) return;
+
+    const progress = document.getElementById('upload-progress');
+    const bar = document.getElementById('upload-progress-bar');
+    progress.style.display = 'block';
+
+    for (let i = 0; i < images.length; i++) {
+      bar.style.width = `${Math.round((i / images.length) * 100)}%`;
+      await uploadPhoto(images[i]);
+    }
+
+    bar.style.width = '100%';
+    setTimeout(() => { progress.style.display = 'none'; bar.style.width = '0%'; }, 600);
+    fileInput.value = '';
+    loadPhotos();
+  }
+
+  async function uploadPhoto(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_PRESET);
+
+    try {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      if (!data.secure_url) throw new Error('업로드 실패');
+
+      await fetch(`${API}/api/photos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: JSON.stringify({ url: data.secure_url, caption: '' })
+      });
+    } catch (err) {
+      alert(`업로드 실패: ${file.name}`);
+    }
+  }
+
+  async function loadPhotos() {
+    const state = document.getElementById('photo-state');
+    const grid = document.getElementById('photo-grid');
+    state.style.display = 'block';
+    state.textContent = '불러오는 중...';
+    grid.innerHTML = '';
+
+    try {
+      const res = await fetch(`${API}/api/photos`);
+      allPhotos = await res.json();
+      renderPhotos();
+    } catch {
+      state.textContent = '사진을 불러오지 못했습니다.';
+    }
+  }
+
+  function renderPhotos() {
+    const state = document.getElementById('photo-state');
+    const grid = document.getElementById('photo-grid');
+
+    if (!allPhotos.length) {
+      state.textContent = '등록된 사진이 없습니다. 위에서 업로드해보세요.';
+      grid.innerHTML = '';
+      return;
+    }
+
+    state.style.display = 'none';
+    grid.innerHTML = allPhotos.map(p => `
+      <div class="photo-item" id="photo-${p.id}">
+        <img src="${p.url}" alt="${p.caption || '현장사진'}" loading="lazy" />
+        <div class="photo-item-overlay">
+          ${p.caption ? `<span class="photo-caption">${p.caption}</span>` : ''}
+          <button class="btn-photo-delete" onclick="deletePhoto(${p.id})">삭제</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function deletePhoto(id) {
+    if (!confirm('이 사진을 삭제할까요?')) return;
+    try {
+      const res = await fetch(`${API}/api/photos/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem('admin_token')}` }
+      });
+      if (!res.ok) throw new Error();
+      allPhotos = allPhotos.filter(p => p.id !== id);
+      renderPhotos();
+    } catch {
+      alert('삭제에 실패했습니다.');
+    }
+  }
+
+  // ══ 수강생 후기 ══════════════════════════════════════════
+
+  let allReviews = [];
+
+  async function loadReviews() {
+    const list = document.getElementById('review-list');
+    list.innerHTML = '<div class="state-msg">불러오는 중...</div>';
+    try {
+      const res = await fetch(`${API}/api/reviews`);
+      allReviews = await res.json();
+      renderReviews();
+    } catch {
+      list.innerHTML = '<div class="state-msg">후기를 불러오지 못했습니다.</div>';
+    }
+  }
+
+  function renderReviews() {
+    const list = document.getElementById('review-list');
+    if (!allReviews.length) {
+      list.innerHTML = '<div class="state-msg">등록된 후기가 없습니다.</div>';
+      return;
+    }
+    list.innerHTML = allReviews.map(r => `
+      <div class="review-item" id="review-${r.id}">
+        <div class="review-item-body">
+          <div class="review-item-meta">
+            <span class="review-item-author">${r.author}</span>
+            <span class="review-item-source">${r.source}</span>
+          </div>
+          <div class="review-item-content">"${r.content}"</div>
+        </div>
+        <button class="btn-delete" onclick="deleteReview(${r.id})" title="삭제">🗑</button>
+      </div>
+    `).join('');
+  }
+
+  async function addReview() {
+    const author = document.getElementById('review-author').value.trim();
+    const source = document.getElementById('review-source').value.trim();
+    const content = document.getElementById('review-content').value.trim();
+
+    if (!author || !content) { alert('작성자와 후기 내용은 필수입니다.'); return; }
+
+    try {
+      const res = await fetch(`${API}/api/reviews`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: JSON.stringify({ author, source: source || '네이버 플레이스 리뷰', content })
+      });
+      if (!res.ok) throw new Error();
+      document.getElementById('review-author').value = '';
+      document.getElementById('review-source').value = '';
+      document.getElementById('review-content').value = '';
+      loadReviews();
+    } catch {
+      alert('후기 추가에 실패했습니다.');
+    }
+  }
+
+  async function deleteReview(id) {
+    if (!confirm('이 후기를 삭제할까요?')) return;
+    try {
+      const res = await fetch(`${API}/api/reviews/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem('admin_token')}` }
+      });
+      if (!res.ok) throw new Error();
+      allReviews = allReviews.filter(r => r.id !== id);
+      renderReviews();
+    } catch {
+      alert('삭제에 실패했습니다.');
     }
   }
 </script>
