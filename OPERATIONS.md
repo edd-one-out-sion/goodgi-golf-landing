@@ -93,7 +93,7 @@ node scripts/convert-webp.mjs
 
 ### 기타
 - [x] 센터 구글 계정 복구 후 GA4/GTM/서치콘솔 관리자 권한 추가 — 동생 본 계정으로 완료
-- [ ] 도메인 변경 시 → 서치콘솔/어드바이저에 새 속성 추가, sitemap.xml URL 수정
+- [x] 도메인 변경 시 → 서치콘솔/어드바이저에 새 속성 추가, sitemap.xml URL 수정 — goodggolf.com 완료
 
 ---
 
