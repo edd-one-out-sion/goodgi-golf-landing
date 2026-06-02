@@ -531,11 +531,23 @@
       gap: 24px;
     }
     .coach-card {
+      position: relative;
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
       text-align: center;
+      cursor: pointer;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+    .coach-card:hover {
+      border-color: rgba(200,162,74,.4);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px rgba(0,0,0,.2);
+    }
+    .coach-card:focus-visible {
+      outline: 2px solid rgba(200,162,74,.9);
+      outline-offset: 4px;
     }
     .coach-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
     .coach-photo-placeholder {
@@ -548,9 +560,90 @@
       color: var(--muted);
     }
     .coach-photo-placeholder svg { width: 40px; height: 40px; }
-    .coach-info { padding: 16px; }
-    .coach-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .coach-role { font-size: 13px; color: var(--accent); }
+    .coach-info { padding: 20px 18px 18px; }
+    .coach-name { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .coach-role { font-size: 15px; color: var(--accent); }
+    .coach-card::after {
+      content: '프로필 크게 보기';
+      display: block;
+      padding: 0 18px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(200,162,74,.9);
+    }
+
+    .coach-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4,4,6,.82);
+      backdrop-filter: blur(10px);
+      z-index: 320;
+      padding: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+    .coach-modal-overlay.open { display: flex; }
+    .coach-modal {
+      width: min(96vw, 1360px);
+      background: #111115;
+      border: 1px solid rgba(200,162,74,.18);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0,0,0,.45);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+    }
+    .coach-modal-media {
+      background: #0b0b0f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      min-height: 82svh;
+    }
+    .coach-modal-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+    }
+    .coach-modal-copy {
+      position: relative;
+      padding: 28px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .coach-modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .coach-modal-eyebrow {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .coach-modal-name { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1; }
+    .coach-modal-role { font-size: 16px; font-weight: 600; color: var(--accent); }
+    .coach-modal-desc {
+      max-width: 220px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
 
     /* ============================================================
        후기
@@ -777,6 +870,18 @@
       .cta-banner { padding: 40px 24px; }
       #sticky-cta { display: flex; }
       main { padding-bottom: 72px; }
+      .coach-card::after { padding: 0 16px 16px; }
+      .coach-modal-overlay { padding: 16px; }
+      .coach-modal {
+        grid-template-columns: 1fr;
+        max-height: calc(100svh - 32px);
+        overflow-y: auto;
+      }
+      .coach-modal-media { max-height: 58svh; padding: 12px; min-height: 0; }
+      .coach-modal-copy { padding: 26px 20px 24px; }
+      .coach-modal-name { font-size: 30px; }
+      .coach-modal-role { font-size: 17px; }
+      .coach-modal-desc { font-size: 15px; }
     }
 
     @media (max-width: 480px) {
@@ -1508,6 +1613,23 @@
     </div>
   </footer>
 
+  <div class="coach-modal-overlay" id="coachModalOverlay" aria-hidden="true">
+    <div class="coach-modal" id="coachModal" role="dialog" aria-modal="true" aria-labelledby="coachModalName">
+      <div class="coach-modal-media">
+        <img id="coachModalImage" src="" alt="" />
+      </div>
+      <div class="coach-modal-copy">
+        <button type="button" class="coach-modal-close" id="coachModalClose" aria-label="코치 프로필 닫기">×</button>
+        <p class="coach-modal-eyebrow">Coach Profile</p>
+        <h3 class="coach-modal-name" id="coachModalName"></h3>
+        <p class="coach-modal-role" id="coachModalRole"></p>
+        <p class="coach-modal-desc">
+          작은 카드보다 더 크게 프로필을 확인할 수 있도록 준비했습니다. 마음에 맞는 코치를 살펴본 뒤 바로 상담으로 이어가실 수 있습니다.
+        </p>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ============================================================
        드로어 (프로그램 상세)
@@ -1692,6 +1814,57 @@
     drawer.addEventListener('touchend', (e) => {
       if (e.changedTouches[0].clientY - touchStartY > 80) closeDrawer();
     }, { passive: true });
+
+    const coachModalOverlay = document.getElementById('coachModalOverlay');
+    const coachModalClose = document.getElementById('coachModalClose');
+    const coachModalImage = document.getElementById('coachModalImage');
+    const coachModalName = document.getElementById('coachModalName');
+    const coachModalRole = document.getElementById('coachModalRole');
+
+    function openCoachModal(card) {
+      const image = card.querySelector('.coach-photo');
+      const name = card.querySelector('.coach-name')?.textContent?.trim() || '';
+      const role = card.querySelector('.coach-role')?.textContent?.trim() || '';
+      if (!image || !name) return;
+
+      coachModalImage.src = image.currentSrc || image.src;
+      coachModalImage.alt = image.alt || `${name} ${role}`.trim();
+      coachModalName.textContent = name;
+      coachModalRole.textContent = role;
+      coachModalOverlay.classList.add('open');
+      coachModalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCoachModal() {
+      coachModalOverlay.classList.remove('open');
+      coachModalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.coach-card').forEach(card => {
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-haspopup', 'dialog');
+      card.addEventListener('click', () => openCoachModal(card));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openCoachModal(card);
+        }
+      });
+    });
+
+    coachModalClose.addEventListener('click', closeCoachModal);
+    coachModalOverlay.addEventListener('click', (e) => {
+      if (e.target === coachModalOverlay) closeCoachModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && coachModalOverlay.classList.contains('open')) {
+        closeCoachModal();
+      }
+    });
   </script>
 
 </body>
