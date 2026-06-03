@@ -427,7 +427,20 @@
       grid-template-rows: auto;
       gap: 8px;
     }
+    .gallery-group {
+      margin-top: 26px;
+    }
+    .gallery-group:first-of-type {
+      margin-top: 0;
+    }
+    .gallery-group-title {
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
     .gallery-item {
+      position: relative;
       background: var(--surface-2);
       border-radius: 8px;
       border: 1px solid var(--border);
@@ -440,12 +453,124 @@
       font-size: 12px;
       text-align: center;
       cursor: pointer;
-      transition: opacity .2s;
+      transition: border-color .14s ease, opacity .14s ease;
     }
-    .gallery-item:hover { opacity: .85; }
+    .gallery-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      background: rgba(200,162,74,.08);
+      transition: opacity .14s ease;
+    }
+    .gallery-item:hover,
+    .gallery-item:focus-visible {
+      border-color: rgba(200,162,74,.58);
+      opacity: .94;
+      outline: none;
+    }
+    .gallery-item:hover::before,
+    .gallery-item:focus-visible::before {
+      opacity: 1;
+    }
     .gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
     .gallery-item.tall { grid-row: span 2; aspect-ratio: 1/2; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    @media (min-width: 769px) {
+      .gallery-item picture {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .gallery-grid-field,
+      .gallery-grid-studio {
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 118px;
+        gap: 10px;
+      }
+      .gallery-grid-field {
+        grid-template-rows: repeat(3, 118px);
+      }
+      .gallery-grid-studio {
+        grid-template-rows: repeat(4, 118px);
+      }
+      .gallery-grid-field .gallery-item,
+      .gallery-grid-studio .gallery-item {
+        position: relative;
+        grid-column: auto;
+        grid-row: auto;
+        aspect-ratio: auto;
+        min-width: 0;
+        min-height: 0;
+      }
+      .gallery-grid-field picture,
+      .gallery-grid-studio picture {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        min-height: 0;
+      }
+      .gallery-grid-field img,
+      .gallery-grid-studio img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        min-height: 0;
+      }
+      .gallery-grid-field .gallery-item:nth-child(1) {
+        grid-column: 1 / span 3;
+        grid-row: span 3;
+      }
+      .gallery-grid-field .gallery-item:nth-child(2) {
+        grid-column: 4 / span 3;
+        grid-row: span 3;
+      }
+      .gallery-grid-field .gallery-item:nth-child(3) {
+        grid-column: 7 / span 6;
+        grid-row: span 3;
+      }
+      .gallery-grid-field .gallery-item:nth-child(1) img,
+      .gallery-grid-field .gallery-item:nth-child(2) img {
+        object-position: center 56%;
+      }
+      .gallery-grid-field .gallery-item:nth-child(3) img {
+        object-position: center center;
+      }
+      .gallery-grid-studio .gallery-item:nth-child(1) {
+        grid-column: 1 / span 6;
+        grid-row: span 2;
+      }
+      .gallery-grid-studio .gallery-item:nth-child(2) {
+        grid-column: 7 / span 3;
+        grid-row: span 2;
+      }
+      .gallery-grid-studio .gallery-item:nth-child(3) {
+        grid-column: 10 / span 3;
+        grid-row: span 4;
+      }
+      .gallery-grid-studio .gallery-item:nth-child(4) {
+        grid-column: 1 / span 3;
+        grid-row: span 2;
+      }
+      .gallery-grid-studio .gallery-item:nth-child(5) {
+        grid-column: 4 / span 3;
+        grid-row: span 2;
+      }
+      .gallery-grid-studio .gallery-item:nth-child(6) {
+        grid-column: 7 / span 3;
+        grid-row: span 2;
+      }
+      .gallery-grid-studio .gallery-item:nth-child(3) img,
+      .gallery-grid-studio .gallery-item:nth-child(5) img {
+        object-position: center 62%;
+      }
+    }
     /* ============================================================
        유튜브 섹션
     ============================================================ */
@@ -643,6 +768,94 @@
       font-size: 13px;
       line-height: 1.6;
       color: var(--muted);
+    }
+    @media (min-width: 769px) {
+      .coach-modal-overlay {
+        padding: 40px;
+      }
+      .coach-modal {
+        width: min(88vw, 980px);
+        max-height: 78svh;
+        grid-template-columns: minmax(0, 1fr) 240px;
+        border-radius: 24px;
+      }
+      .coach-modal-media {
+        min-height: 0;
+        height: min(66svh, 720px);
+      }
+      .coach-modal-copy {
+        padding: 26px 20px 22px;
+      }
+      .coach-modal-media img {
+        max-height: 100%;
+      }
+    }
+
+    .gallery-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 330;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(4,4,6,.86);
+    }
+    .gallery-modal-overlay.open { display: flex; }
+    .gallery-modal {
+      position: relative;
+      width: min(94vw, 1120px);
+      max-height: 90svh;
+      overflow: hidden;
+      border: 1px solid rgba(200,162,74,.22);
+      border-radius: 28px;
+      background: #0d0d10;
+      box-shadow: 0 28px 80px rgba(0,0,0,.55);
+    }
+    .gallery-modal figure { margin: 0; }
+    .gallery-modal-image-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: min(66svh, 660px);
+      background: #050506;
+    }
+    .gallery-modal-image-wrap img {
+      display: block;
+      width: 100%;
+      max-height: min(66svh, 660px);
+      object-fit: contain;
+    }
+    .gallery-modal-caption {
+      padding: 20px 24px 22px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(18,18,21,.96), rgba(12,12,14,.98));
+    }
+    .gallery-modal-eyebrow {
+      margin-bottom: 6px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .gallery-modal-title {
+      font-size: clamp(22px, 2vw, 30px);
+      line-height: 1.25;
+    }
+    .gallery-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      background: rgba(12,12,14,.72);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
     }
 
     /* ============================================================
@@ -857,6 +1070,7 @@
         padding-bottom: 4px;
       }
       .gallery-grid::-webkit-scrollbar { display: none; }
+      .gallery-group { margin-top: 28px; }
       .gallery-item,
       .gallery-item.wide,
       .gallery-item.tall {
@@ -992,7 +1206,7 @@
           </div>
 
           <div class="about-image reveal" data-delay="2">
-            <picture><source srcset="assets/images/studio-lobby.webp" type="image/webp"><img src="assets/images/studio-lobby.jpg" alt="구찌골프스튜디오 내부" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)" loading="lazy" /></picture>
+            <picture><source srcset="assets/images/studio-lobby-card.webp" type="image/webp"><img src="assets/images/studio-lobby-card.webp" alt="구찌골프스튜디오 내부" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)" loading="lazy" decoding="async" /></picture>
           </div>
 
         </div>
@@ -1148,39 +1362,46 @@
           <span class="section-label">Gallery</span>
           <h2 class="section-title">레슨 현장</h2>
           <p class="section-sub">
-            실제 레슨 장면과 스튜디오를 확인하세요.
+            실제 레슨 장면과 스튜디오 시설을 확인하세요.
           </p>
         </div>
 
-        <div class="gallery-grid reveal">
-          <div class="gallery-item wide">
-            <picture><source srcset="assets/images/field-lesson-01.webp" type="image/webp"><img src="assets/images/field-lesson-01.jpg" alt="외부 필드 레슨" loading="lazy" /></picture>
+        <div class="gallery-group reveal">
+          <p class="gallery-group-title">필드/숏게임 레슨</p>
+          <div class="gallery-grid gallery-grid-field">
+            <div class="gallery-item tall" data-gallery-title="필드 벙커 레슨" data-modal-src="assets/images/field-lesson-01-modal.webp">
+              <picture><source srcset="assets/images/field-lesson-01-card.webp" type="image/webp"><img src="assets/images/field-lesson-01-card.webp" alt="외부 필드 레슨" loading="lazy" decoding="async" /></picture>
+            </div>
+            <div class="gallery-item tall" data-gallery-title="숏게임 자세 교정" data-modal-src="assets/images/field-lesson-02-modal.webp">
+              <picture><source srcset="assets/images/field-lesson-02-card.webp" type="image/webp"><img src="assets/images/field-lesson-02-card.webp" alt="필드 레슨 교정" loading="lazy" decoding="async" /></picture>
+            </div>
+            <div class="gallery-item wide" data-gallery-title="실전 필드 코칭" data-modal-src="assets/images/field-lesson-03-modal.webp">
+              <picture><source srcset="assets/images/field-lesson-03-card.webp" type="image/webp"><img src="assets/images/field-lesson-03-card.webp" alt="외부 레슨 현장" loading="lazy" decoding="async" /></picture>
+            </div>
           </div>
-          <div class="gallery-item">
-            <picture><source srcset="assets/images/studio-screen-bay-front.webp" type="image/webp"><img src="assets/images/studio-screen-bay-front.jpg" alt="스크린 타석" loading="lazy" /></picture>
-          </div>
-          <div class="gallery-item">
-            <picture><source srcset="assets/images/studio-trackman-data.webp" type="image/webp"><img src="assets/images/studio-trackman-data.jpg" alt="트랙맨 데이터 분석" loading="lazy" /></picture>
-          </div>
-          <div class="gallery-item tall">
-            <picture><source srcset="assets/images/studio-putting-green-01.webp" type="image/webp"><img src="assets/images/studio-putting-green-01.jpg" alt="퍼팅 그린" loading="lazy" /></picture>
-          </div>
-          <div class="gallery-item">
-            <picture><source srcset="assets/images/field-lesson-02.webp" type="image/webp"><img src="assets/images/field-lesson-02.jpg" alt="필드 레슨 교정" loading="lazy" /></picture>
-          </div>
-          <div class="gallery-item">
-            <picture><source srcset="assets/images/studio-screen-bay-side.webp" type="image/webp"><img src="assets/images/studio-screen-bay-side.jpg" alt="스크린 타석 측면" loading="lazy" /></picture>
-          </div>
-          <!-- 추가 예정: 필드레슨 퍼팅 잡아주는 사진 -->
-          <div class="gallery-item">
-            <picture><source srcset="assets/images/field-lesson-03.webp" type="image/webp"><img src="assets/images/field-lesson-03.jpg" alt="외부 레슨 현장" loading="lazy" /></picture>
-          </div>
-          <div class="gallery-item">
-            <picture><source srcset="assets/images/studio-putting-green-02.webp" type="image/webp"><img src="assets/images/studio-putting-green-02.jpg" alt="퍼팅 그린 전경" loading="lazy" /></picture>
-          </div>
-          <!-- 추가 예정: 구찌골프 월례회 플랜카드 사진 -->
-          <div class="gallery-item wide">
-            <picture><source srcset="assets/images/studio-trackman-device.webp" type="image/webp"><img src="assets/images/studio-trackman-device.jpg" alt="트랙맨 장비" loading="lazy" /></picture>
+        </div>
+
+        <div class="gallery-group reveal" data-delay="1">
+          <p class="gallery-group-title">TrackMan 분석 타석</p>
+          <div class="gallery-grid gallery-grid-studio">
+            <div class="gallery-item wide" data-gallery-title="프라이빗 스크린 타석" data-modal-src="assets/images/studio-screen-bay-front-modal.webp">
+              <picture><source srcset="assets/images/studio-screen-bay-front-card.webp" type="image/webp"><img src="assets/images/studio-screen-bay-front-card.webp" alt="스크린 타석" loading="lazy" decoding="async" /></picture>
+            </div>
+            <div class="gallery-item" data-gallery-title="TrackMan 데이터 분석" data-modal-src="assets/images/studio-trackman-data-modal.webp">
+              <picture><source srcset="assets/images/studio-trackman-data-card.webp" type="image/webp"><img src="assets/images/studio-trackman-data-card.webp" alt="트랙맨 데이터 분석" loading="lazy" decoding="async" /></picture>
+            </div>
+            <div class="gallery-item tall" data-gallery-title="퍼팅 그린" data-modal-src="assets/images/studio-putting-green-01-modal.webp">
+              <picture><source srcset="assets/images/studio-putting-green-01-card.webp" type="image/webp"><img src="assets/images/studio-putting-green-01-card.webp" alt="퍼팅 그린" loading="lazy" decoding="async" /></picture>
+            </div>
+            <div class="gallery-item" data-gallery-title="레슨 타석 전경" data-modal-src="assets/images/studio-screen-bay-side-modal.webp">
+              <picture><source srcset="assets/images/studio-screen-bay-side-card.webp" type="image/webp"><img src="assets/images/studio-screen-bay-side-card.webp" alt="스크린 타석 측면" loading="lazy" decoding="async" /></picture>
+            </div>
+            <div class="gallery-item" data-gallery-title="실내 숏게임 공간" data-modal-src="assets/images/studio-putting-green-02-modal.webp">
+              <picture><source srcset="assets/images/studio-putting-green-02-card.webp" type="image/webp"><img src="assets/images/studio-putting-green-02-card.webp" alt="퍼팅 그린 전경" loading="lazy" decoding="async" /></picture>
+            </div>
+            <div class="gallery-item wide" data-gallery-title="TrackMan 장비" data-modal-src="assets/images/studio-trackman-device-modal.webp">
+              <picture><source srcset="assets/images/studio-trackman-device-card.webp" type="image/webp"><img src="assets/images/studio-trackman-device-card.webp" alt="트랙맨 장비" loading="lazy" decoding="async" /></picture>
+            </div>
           </div>
         </div>
 
@@ -1630,6 +1851,21 @@
     </div>
   </div>
 
+  <div class="gallery-modal-overlay" id="galleryModalOverlay" aria-hidden="true">
+    <div class="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
+      <button type="button" class="gallery-modal-close" id="galleryModalClose" aria-label="갤러리 이미지 닫기">×</button>
+      <figure>
+        <div class="gallery-modal-image-wrap">
+          <img id="galleryModalImage" src="" alt="" />
+        </div>
+        <figcaption class="gallery-modal-caption">
+          <p class="gallery-modal-eyebrow">Gallery</p>
+          <h3 class="gallery-modal-title" id="galleryModalTitle"></h3>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+
 
   <!-- ============================================================
        드로어 (프로그램 상세)
@@ -1863,6 +2099,56 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && coachModalOverlay.classList.contains('open')) {
         closeCoachModal();
+      }
+    });
+
+    const galleryModalOverlay = document.getElementById('galleryModalOverlay');
+    const galleryModalClose = document.getElementById('galleryModalClose');
+    const galleryModalImage = document.getElementById('galleryModalImage');
+    const galleryModalTitle = document.getElementById('galleryModalTitle');
+
+    function openGalleryModal(item) {
+      const image = item.querySelector('img');
+      const title = item.dataset.galleryTitle || image?.alt || '갤러리 이미지';
+      if (!image) return;
+
+      galleryModalImage.src = item.dataset.modalSrc || image.currentSrc || image.src;
+      galleryModalImage.alt = image.alt || title;
+      galleryModalTitle.textContent = title;
+      galleryModalOverlay.classList.add('open');
+      galleryModalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGalleryModal() {
+      galleryModalOverlay.classList.remove('open');
+      galleryModalOverlay.setAttribute('aria-hidden', 'true');
+      galleryModalImage.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('#gallery .gallery-item').forEach(item => {
+      item.tabIndex = 0;
+      item.setAttribute('role', 'button');
+      item.setAttribute('aria-haspopup', 'dialog');
+      item.setAttribute('aria-label', `${item.dataset.galleryTitle || '갤러리 이미지'} 크게 보기`);
+      item.addEventListener('click', () => openGalleryModal(item));
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openGalleryModal(item);
+        }
+      });
+    });
+
+    galleryModalClose.addEventListener('click', closeGalleryModal);
+    galleryModalOverlay.addEventListener('click', (e) => {
+      if (e.target === galleryModalOverlay) closeGalleryModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && galleryModalOverlay.classList.contains('open')) {
+        closeGalleryModal();
       }
     });
   </script>
