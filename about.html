@@ -739,8 +739,10 @@
       padding: 28px 20px 22px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: flex-start;
       gap: 12px;
+      overflow-y: auto;
+      min-height: 0;
     }
     .coach-modal-close {
       position: absolute;
@@ -769,22 +771,58 @@
       line-height: 1.6;
       color: var(--muted);
     }
+    .coach-modal-profile {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-right: 6px;
+    }
+    .coach-profile-section-title {
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .coach-credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .coach-credentials li {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .coach-credentials li::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
     @media (min-width: 769px) {
       .coach-modal-overlay {
         padding: 40px;
       }
       .coach-modal {
-        width: min(88vw, 980px);
-        max-height: 78svh;
-        grid-template-columns: minmax(0, 1fr) 240px;
+        width: min(92vw, 1120px);
+        height: min(84svh, 720px);
+        max-height: 84svh;
+        overflow: hidden;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
         border-radius: 24px;
       }
       .coach-modal-media {
         min-height: 0;
-        height: min(66svh, 720px);
+        height: 100%;
       }
       .coach-modal-copy {
-        padding: 26px 20px 22px;
+        padding: 58px 22px 22px;
       }
       .coach-modal-media img {
         max-height: 100%;
@@ -974,7 +1012,7 @@
       font-weight: 600;
     }
     .sticky-btn-call { background: var(--surface-2); border: 1.5px solid var(--border); color: var(--text); }
-    .sticky-btn-kakao { background: #FEE500; color: #3C1E1E; }
+    .sticky-btn-naver { background: #03C75A; color: #fff; }
     .sticky-btn-form { background: var(--accent); color: var(--accent-ink); }
 
     /* ============================================================
@@ -1123,9 +1161,10 @@
           <li><a href="#media">미디어</a></li>
           <li><a href="#location">위치</a></li>
         </ul>
-        <a href="#cta" class="btn btn-primary nav-cta"
-           onclick="gtag('event','cta_click',{button:'about_header_cta'})">
-          체험수업 신청
+        <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+           class="btn btn-primary nav-cta"
+           onclick="gtag('event','cta_click',{button:'about_header_place'})">
+          네이버 플레이스
         </a>
         <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
           <span></span><span></span><span></span>
@@ -1141,9 +1180,10 @@
     <a href="#coaches" class="mobile-nav-link">코치 소개</a>
     <a href="#media" class="mobile-nav-link">미디어</a>
     <a href="#location" class="mobile-nav-link">위치</a>
-    <a href="#cta" class="mobile-nav-link mobile-cta"
-       onclick="gtag('event','cta_click',{button:'about_mobile_menu_cta'})">
-      체험수업 신청하기 →
+    <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+       class="mobile-nav-link mobile-cta"
+       onclick="gtag('event','cta_click',{button:'about_mobile_menu_place'})">
+      네이버 플레이스 →
     </a>
   </nav>
 
@@ -1166,9 +1206,10 @@
           필드에 설 수 있는 실력을 만들어드립니다.
         </p>
         <div class="hero-actions reveal" data-delay="3">
-          <a href="#cta" class="btn btn-primary"
-             onclick="gtag('event','cta_click',{button:'about_hero_primary'})">
-            체험수업 신청하기
+          <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+             class="btn btn-primary"
+             onclick="gtag('event','cta_click',{button:'about_hero_place'})">
+            네이버 플레이스
           </a>
           <a href="#curriculum" class="btn btn-secondary">
             12주 커리큘럼 보기
@@ -1668,22 +1709,25 @@
 
           <div class="review-card reveal" data-delay="1">
             <p class="review-stars">★★★★★</p>
-            <p class="review-text">"서해리 프로님께 레슨을 받으면서 가장 크게 느낀 점은 '기본의 중요성'을 끝까지 놓지 않게 해주신다는 부분입니다. 스윙의 작은 부분까지도 반복적으로 잡아주시면서, 자연스럽게 올바른 자세가 몸에 익도록 도와주셨습니다."</p>
-            <p class="review-author">han****</p>
+            <p class="review-text">"서해리 프로님한테 골프 체험수업 가볍게 갔다가 바로 등록했어요. 설명도 너무 쉽게 잘해주시고 분위기가 편해서 좋았는데 여자 프로님이라 더 편하고 안심됐어요. 프라이빗하게 수업받는 느낌이라 너무 좋았고 포인트를 딱딱 짚어주셔서 이해가 잘됐어요. 너무 오랜만에 해서 겁났는데 용기도 불어넣어주셔서 결국 바로 등록해버렸어요 :)"</p>
+            <p class="review-author">soo***</p>
+            <p class="review-program">4.16.목 · 1번째 방문 · 영수증</p>
             <p class="review-program">네이버 플레이스 리뷰</p>
           </div>
 
           <div class="review-card reveal" data-delay="2">
             <p class="review-stars">★★★★★</p>
-            <p class="review-text">"조채영 프로님께 꾸준히 레슨받고 있어요. 첫라운드를 구찌골프 월례회로 나갔는데, 라운드 할때도 세심하게 알려주시고 챙겨주셔서 정말 도움이 많이 됐어요. 첫라운드를 준비하는 분들이나 초보자분들 진짜 강추합니다."</p>
-            <p class="review-author">일상의 루틴</p>
+            <p class="review-text">"조채영프로님께 원포인트레슨 받았어요. 연습하면서 안되는데 뭐가 문제인지 모를때 역시 전문가를 만나야 해결된다는걸 오늘 절실하게 느꼈어요. 잘못된부분 바로 잡아주시고, 바른자세 시범보여주시고... 오늘 레슨받고 연습 좀했더니 많이 나아졌어요~ 골프에서의 멘탈 중요성도 굵고 짧게 설명해주셔서 많은 도움되었어요~ 추천해요~~^^"</p>
+            <p class="review-author">십***</p>
+            <p class="review-program">5.22.금 · 3번째 방문 · 영수증</p>
             <p class="review-program">네이버 플레이스 리뷰</p>
           </div>
 
           <div class="review-card reveal" data-delay="3">
             <p class="review-stars">★★★★★</p>
-            <p class="review-text">"트랙맨 프로그램으로 저의 문제점을 데이터로 확실하게 볼 수 있었고, 프로님이 항상 레슨일지로 사진과 글을 비교하면서 문제점을 너무 적나라하게 잘 꼭 집어 주세요!! 여기근처에서 이곳만큼 시설도 깔끔하고 주차장도 넓으면서 레슨 받기 좋은 공간은 없는 것 같아요!!"</p>
-            <p class="review-author">polaris861015</p>
+            <p class="review-text">"서해리 프로님께서 기본부터 탄탄하게 자세를 잡아주시고, 왜 잘못된 동작이 나오는지와 어떻게 교정하면 더 좋은 스윙이 되는지 정말 상세하게 설명해주셔서 이해가 잘 됩니다. 또 레슨 분위기도 좋아서 골프에 대한 재미를 자연스럽게 느끼게 해주시는 점이 가장 만족스럽습니다. 골프와 친해지고 싶은 분들께 추천 드립니다!"</p>
+            <p class="review-author">han***</p>
+            <p class="review-program">5.15.금 · 4번째 방문 · 영수증</p>
             <p class="review-program">네이버 플레이스 리뷰</p>
           </div>
 
@@ -1764,14 +1808,15 @@
                onclick="gtag('event','cta_click',{button:'about_cta_call'})">
               전화로 문의하기
             </a>
-            <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
+            <a href="https://talk.naver.com/ct/w4590o" target="_blank" rel="noopener"
                class="btn btn-secondary"
-               onclick="gtag('event','cta_click',{button:'about_cta_kakao'})">
-              카카오로 상담하기
+               onclick="gtag('event','cta_click',{button:'about_cta_naver'})">
+              네이버 톡톡
             </a>
-            <a href="index.html#contact" class="btn btn-tertiary"
-               onclick="gtag('event','cta_click',{button:'about_cta_form'})">
-              문의 남기기
+            <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+               class="btn btn-tertiary"
+               onclick="gtag('event','cta_click',{button:'about_cta_place'})">
+              네이버 플레이스
             </a>
           </div>
         </div>
@@ -1844,9 +1889,7 @@
         <p class="coach-modal-eyebrow">Coach Profile</p>
         <h3 class="coach-modal-name" id="coachModalName"></h3>
         <p class="coach-modal-role" id="coachModalRole"></p>
-        <p class="coach-modal-desc">
-          작은 카드보다 더 크게 프로필을 확인할 수 있도록 준비했습니다. 마음에 맞는 코치를 살펴본 뒤 바로 상담으로 이어가실 수 있습니다.
-        </p>
+        <div class="coach-modal-profile" id="coachModalProfile"></div>
       </div>
     </div>
   </div>
@@ -1881,9 +1924,9 @@
     <div class="drawer-cta">
       <a href="tel:010-8441-3065" class="btn btn-primary"
          onclick="gtag('event','cta_click',{button:'drawer_call'})">전화 문의</a>
-      <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
+      <a href="https://talk.naver.com/ct/w4590o" target="_blank" rel="noopener"
          class="btn btn-secondary"
-         onclick="gtag('event','cta_click',{button:'drawer_kakao'})">카카오 상담</a>
+         onclick="gtag('event','cta_click',{button:'drawer_naver'})">네이버 톡톡</a>
     </div>
   </div>
 
@@ -1899,13 +1942,14 @@
       </svg>
       전화
     </a>
-    <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
-       class="sticky-btn sticky-btn-kakao"
-       onclick="gtag('event','cta_click',{button:'about_sticky_kakao'})">
-      카카오
+    <a href="https://talk.naver.com/ct/w4590o" target="_blank" rel="noopener"
+       class="sticky-btn sticky-btn-naver"
+       onclick="gtag('event','cta_click',{button:'about_sticky_naver'})">
+      톡톡
     </a>
-    <a href="#cta" class="sticky-btn sticky-btn-form"
-       onclick="gtag('event','cta_click',{button:'about_sticky_cta'})">
+    <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+       class="sticky-btn sticky-btn-form"
+       onclick="gtag('event','cta_click',{button:'about_sticky_place'})">
       문의
     </a>
   </div>
@@ -2057,6 +2101,161 @@
     const coachModalName = document.getElementById('coachModalName');
     const coachModalRole = document.getElementById('coachModalRole');
 
+    const coachModalProfile = document.getElementById('coachModalProfile');
+    const coachProfiles = {
+      '양정화': {
+        '자격사항': [
+          'KLPGA 정회원',
+          'LPGA TEP L.v 1',
+          '국민대학교 헬스케어매니지먼트 석사',
+          '한양대학교 레저스포츠 학사',
+          '전문스포츠지도사 골프 2급',
+          '노인스포츠지도사 골프 2급',
+          '민주평화통일자문위원회 동작구 갑 체육분과위원장',
+          'TPI LEVEL 1',
+          'SOMECO 해부학 전문가과정 수료',
+          'SOMECO GOLF 전문가과정 수료',
+          'Edel Putter Fitting Clinic 수료',
+          'Balance Corefit LEVEL 1,2,3 수료',
+          'Golf Data Analysis Professional Course 수료',
+          'Trackman Seminar 수료',
+        ],
+      },
+      '김효선': {
+        '자격사항': [
+          'LPGA CLASS A',
+          'KLPGA PRO',
+          '한양대학교 레저스포츠 체육학 재학',
+          '스페인어 자격증 C1',
+          'TPI LEVEL 1',
+          'THE GOLFING MACHINE 수료',
+          'GOLF FITNESS: 흉추회전 과정 수료',
+          'SOMECO ANATOMY 8주 과정 수료',
+          'BALANCE COREFIT LEVEL 1,2,3 수료',
+          'PUTTER FITTING CLINIC 수료',
+          'TRACKMAN SEMINAR 수료',
+          'GOLF DATA ANALYSIS PROFESSIONAL COURSE 수료',
+        ],
+        '경력사항': [
+          '2018- KLPGA TOUR',
+          '2022-현재 구찌골프 소속 헤드프로',
+        ],
+        '주요성적': [
+          'KLPGA 2019-2021 3년 연속 투어 풀시드',
+          '2018 토백이·백제CC 점프투어 5위',
+          '2018 그랜드·삼대인 점프투어 8차전 12위',
+          '2018 그랜드·삼대인 점프투어 9차전 7위',
+          '2019 토백이·백제CC 점프투어 1차전 17위',
+          '2019 솔라고·파워풀엑스 점프투어 11차전 5위',
+          '2020 파워풀엑스·솔라고 점프투어 10차전 4위',
+          '2021 그랜드·삼대인 점프투어 7차전 20위',
+          '그 외 KLPGA 시합 다수 입상',
+        ],
+      },
+      '조채영': {
+        '자격사항': [
+          'KLPGA PRO',
+          'LPGA TEP Level 1',
+          'TPI Level 1',
+          'TPI Level 2',
+          '중앙대학교 골프학과 졸업',
+          'TRACKMAN SEMINAR 수료',
+          'GOLF DATA ANALYSIS PROFESSIONAL COURSE 수료',
+          'ADEL PUTTER FITTING CLINIC 수료',
+          '증권투자자문인력',
+          '투자자산운용사',
+        ],
+        '경력사항': [
+          '2015~2020 미래에셋증권 프로골프단 VIP 고객 레슨',
+          '2020~2022 메리츠증권 VIP 고객레슨 법인영업',
+          '2023~2024 이룸골프아카데미 강남센터 메인프로',
+          '2024~현재 구찌골프스튜디오 메인프로',
+        ],
+        '주요성적': [
+          '2005 서울시장배 청소년골프대회 여고부 우승',
+          '2006 빅야드 파맥스 중고연맹 여고부 단체전 우승',
+          '2006~2009 드림투어 풀시드',
+          '2007 드림투어 시드순위전 3등',
+          '2007 제니아엔조이골프투어 5차전 8등',
+        ],
+      },
+      '서해리': {
+        '자격사항': [
+          'KLPGA PRO',
+          'TPI Level 1',
+          'GOLF FITNESS: 흉추회전 수료',
+          'PUTTER FITTING CLINIC 수료',
+        ],
+        '주요성적': [
+          '2015~2016 전국체육대회 골프 제주도 대표 선발',
+          '2016 송보배컵 전도주니어골프대회 여고등부 우승',
+          '2016 MBC·오라배 전도주니어골프선수권대회 여고등부 우승',
+          'KLPGA 2019 석정힐CC 시드순위전 예선 1위',
+          'KLPGA 2019 석정힐CC 시드순위전 본선 1위',
+          '2015 박인비배 제주도주니어골프선수권대회 여고등부 3위',
+          '2015 MBC·오라배 전도주니어골프선수권대회 여고등부 3위',
+          'KLPGA 2020 볼빅·백제CC 점프투어 5차전 4위',
+          'KLPGA 2019 솔라고·파워풀엑스 점프투어 12차전 14위',
+          'KLPGA 2021 XGOLF·백제CC 점프투어 2차전 14위',
+          'KLPGA 2019 토백이·백제CC 점프투어 2차전 17위',
+          'KLPGA 2020 파워풀엑스·솔라고 점프투어 10차전 17위',
+          'KLPGA 2019 석정힐CC·코리아 드라이브 점프투어 16차전 18위',
+        ],
+        '경력사항': [
+          "2023 SG GOLF 'FUNFUN MATCH' 4 출연",
+          "2024 SG GOLF 'FUNFUN MATCH' 5 출연",
+          "2025 SG GOLF 'THE MATCH CHAMPIONSHIP' 출연",
+          "2024 '공치는 명훈이' YOUTUBE 출연",
+          "2025 '공치는 명훈이' YOUTUBE 출연",
+        ],
+      },
+      '이유민': {
+        '자격사항': [
+          'KLPGA 정회원',
+          '성균관대학교 스포츠과학과 졸업',
+          '골프 데이터의 정의 및 응용 교육 수료',
+        ],
+        '경력사항': [
+          '2016- KLPGA TOUR',
+          '2025- 청라 프렌즈 아카데미 근무',
+          '송도 QED 아카데미 근무',
+          '2026-현재 구찌골프 소속 메인프로',
+        ],
+        '주요성적': [
+          '2013 한국중고연맹 스포츠조선배 준우승',
+          '2014 한국중고연맹 회장배 준우승',
+          '2016 신안그룹배 점프투어 12차전 우승',
+          '2016 신안그룹배 점프투어 3차 디비전 상금순위 1위',
+          '2018 백제CC 드림투어 11차전 준우승',
+          '그 외 드림투어 TOP10 다수',
+          '초·중·고 인천시장배, 교육감배 등 인천시 대회 다수 우승',
+          '그 외 한국중고연맹 TOP10 다수',
+          '2016 신안그룹배 점프투어 10차전 3위',
+          '2019 정규투어 시드 순위 42위 부분시드 활동',
+          '2019 드림투어 풀 시드권 보유',
+          '2019 군산CC 드림투어 1차 대회 5위',
+          '2021 정규투어 시드 순위 48위 부분시드 활동',
+        ],
+      },
+    };
+
+    function renderCoachProfile(name) {
+      const profile = coachProfiles[name];
+      if (!profile) {
+        coachModalProfile.innerHTML = '<p class="coach-modal-desc">작은 카드보다 더 크게 프로필을 확인할 수 있도록 준비했습니다.</p>';
+        return;
+      }
+
+      coachModalProfile.innerHTML = Object.entries(profile).map(([title, items]) => `
+        <section>
+          <h4 class="coach-profile-section-title">${title}</h4>
+          <ul class="coach-credentials">
+            ${items.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </section>
+      `).join('');
+    }
+
     function openCoachModal(card) {
       const image = card.querySelector('.coach-photo');
       const name = card.querySelector('.coach-name')?.textContent?.trim() || '';
@@ -2067,6 +2266,7 @@
       coachModalImage.alt = image.alt || `${name} ${role}`.trim();
       coachModalName.textContent = name;
       coachModalRole.textContent = role;
+      renderCoachProfile(name);
       coachModalOverlay.classList.add('open');
       coachModalOverlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';

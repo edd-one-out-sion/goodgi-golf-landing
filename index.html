@@ -53,20 +53,20 @@
       {
         "@type": "Review",
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "author": { "@type": "Person", "name": "han****" },
-        "reviewBody": "서해리 프로님께 레슨을 받으면서 가장 크게 느낀 점은 기본의 중요성을 끝까지 놓지 않게 해주신다는 부분입니다. 스윙의 작은 부분까지도 반복적으로 잡아주시면서 자연스럽게 올바른 자세가 몸에 익도록 도와주셨습니다."
+        "author": { "@type": "Person", "name": "soo***" },
+        "reviewBody": "서해리 프로님한테 골프 체험수업 가볍게 갔다가 바로 등록했어요. 설명도 너무 쉽게 잘해주시고 분위기가 편해서 좋았는데 여자 프로님이라 더 편하고 안심됐어요."
       },
       {
         "@type": "Review",
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "author": { "@type": "Person", "name": "일상의 루틴" },
-        "reviewBody": "조채영 프로님께 꾸준히 레슨받고 있어요. 첫라운드를 구찌골프 월례회로 나갔는데 라운드 할때도 세심하게 알려주시고 챙겨주셔서 정말 도움이 많이 됐어요. 초보자분들 진짜 강추합니다."
+        "author": { "@type": "Person", "name": "십***" },
+        "reviewBody": "조채영프로님께 원포인트레슨 받았어요. 잘못된부분 바로 잡아주시고, 바른자세 시범보여주시고, 오늘 레슨받고 연습 좀했더니 많이 나아졌어요."
       },
       {
         "@type": "Review",
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "author": { "@type": "Person", "name": "polaris861015" },
-        "reviewBody": "트랙맨 프로그램으로 저의 문제점을 데이터로 확실하게 볼 수 있었고 프로님이 항상 레슨일지로 사진과 글을 비교하면서 문제점을 적나라하게 잘 집어 주세요. 시설도 깔끔하고 주차장도 넓으면서 레슨 받기 좋은 공간입니다."
+        "author": { "@type": "Person", "name": "han***" },
+        "reviewBody": "서해리 프로님께서 기본부터 탄탄하게 자세를 잡아주시고, 왜 잘못된 동작이 나오는지와 어떻게 교정하면 더 좋은 스윙이 되는지 정말 상세하게 설명해주셔서 이해가 잘 됩니다."
       }
     ]
   }
@@ -684,8 +684,10 @@
       padding: 28px 20px 22px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: flex-start;
       gap: 12px;
+      overflow-y: auto;
+      min-height: 0;
     }
 
     .coach-modal-close {
@@ -727,6 +729,20 @@
       color: var(--muted);
     }
 
+    .coach-modal-profile {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-right: 6px;
+    }
+
+    .coach-profile-section-title {
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
     .coach-credentials {
       display: flex;
       flex-direction: column;
@@ -750,6 +766,34 @@
       background: var(--accent);
       margin-top: 7px;
       flex-shrink: 0;
+    }
+
+    @media (min-width: 769px) {
+      .coach-modal-overlay {
+        padding: 40px;
+      }
+
+      .coach-modal {
+        width: min(92vw, 1120px);
+        height: min(84svh, 720px);
+        max-height: 84svh;
+        overflow: hidden;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
+        border-radius: 24px;
+      }
+
+      .coach-modal-media {
+        min-height: 0;
+        height: 100%;
+      }
+
+      .coach-modal-copy {
+        padding: 58px 22px 22px;
+      }
+
+      .coach-modal-media img {
+        max-height: 100%;
+      }
     }
 
     .studio-stats {
@@ -1456,9 +1500,9 @@
       color: var(--text);
     }
 
-    .sticky-btn-kakao {
-      background: #FEE500;
-      color: #3C1E1E;
+    .sticky-btn-naver {
+      background: #03C75A;
+      color: #fff;
     }
 
     .sticky-btn-form {
@@ -1604,9 +1648,10 @@
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#location">위치</a></li>
         </ul>
-        <a href="#contact" class="btn btn-primary nav-cta"
-           onclick="gtag('event','cta_click',{button:'header_cta'})">
-          체험수업 신청
+        <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+           class="btn btn-primary nav-cta"
+           onclick="gtag('event','cta_click',{button:'header_place'})">
+          네이버 플레이스
         </a>
         <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
           <span></span><span></span><span></span>
@@ -1621,9 +1666,10 @@
     <a href="#coaches" class="mobile-nav-link">코치 소개</a>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
     <a href="#location" class="mobile-nav-link">위치</a>
-    <a href="#contact" class="mobile-nav-link mobile-cta"
-       onclick="gtag('event','cta_click',{button:'mobile_menu_cta'})">
-      체험수업 신청하기 →
+    <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+       class="mobile-nav-link mobile-cta"
+       onclick="gtag('event','cta_click',{button:'mobile_menu_place'})">
+      네이버 플레이스 →
     </a>
   </nav>
 
@@ -1646,7 +1692,8 @@
           </div>
 
           <h1 class="hero-title reveal" data-delay="1">
-            스코어가 안 줄어드는<br />
+            스코어가<br />
+            안 줄어드는<br />
             진짜 이유를<br />
             <em>찾아드립니다</em>
           </h1>
@@ -1658,13 +1705,14 @@
           </p>
 
           <div class="hero-cta-group reveal" data-delay="3">
-            <a href="#contact" class="btn btn-primary"
-               onclick="gtag('event','cta_click',{button:'hero_form'})">
+            <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+               class="btn btn-primary"
+               onclick="gtag('event','cta_click',{button:'hero_place'})">
               <!-- 폼 아이콘 -->
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
-              체험수업 신청하기
+              네이버 플레이스
             </a>
             <a href="tel:010-8441-3065" class="btn btn-secondary"
                onclick="gtag('event','cta_click',{button:'hero_call'})">
@@ -1747,12 +1795,13 @@
               <span style="color:var(--accent);font-size:18px">★★★★★</span>
             </div>
             <p style="font-size:15px;line-height:1.75;margin-bottom:20px;color:var(--text)">
-              "서해리 프로님께 레슨을 받으면서 가장 크게 느낀 점은 '기본의 중요성'을 끝까지 놓지 않게 해주신다는 부분입니다. 스윙의 작은 부분까지도 반복적으로 잡아주시면서, 자연스럽게 올바른 자세가 몸에 익도록 도와주셨습니다."
+              "서해리 프로님한테 골프 체험수업 가볍게 갔다가 바로 등록했어요. 설명도 너무 쉽게 잘해주시고 분위기가 편해서 좋았는데 여자 프로님이라 더 편하고 안심됐어요. 프라이빗하게 수업받는 느낌이라 너무 좋았고 포인트를 딱딱 짚어주셔서 이해가 잘됐어요. 너무 오랜만에 해서 겁났는데 용기도 불어넣어주셔서 결국 바로 등록해버렸어요 :)"
             </p>
             <div style="display:flex;align-items:center;gap:10px">
               <div style="width:36px;height:36px;border-radius:50%;background:var(--border);flex-shrink:0"></div>
               <div>
-                <p style="font-size:13px;font-weight:600">han****</p>
+                <p style="font-size:13px;font-weight:600">soo***</p>
+                <p style="font-size:12px;color:var(--muted);margin-top:2px">4.16.목 · 1번째 방문 · 영수증</p>
                 <p style="font-size:12px;color:var(--muted)">네이버 플레이스 리뷰</p>
               </div>
             </div>
@@ -1763,12 +1812,13 @@
               <span style="color:var(--accent);font-size:18px">★★★★★</span>
             </div>
             <p style="font-size:15px;line-height:1.75;margin-bottom:20px;color:var(--text)">
-              "조채영 프로님께 꾸준히 레슨받고 있어요. 첫라운드를 구찌골프 월례회로 나갔는데, 라운드 할때도 세심하게 알려주시고 챙겨주셔서 정말 도움이 많이 됐어요. 첫라운드를 준비하는 분들이나 초보자분들 진짜 강추합니다."
+              "조채영프로님께 원포인트레슨 받았어요. 연습하면서 안되는데 뭐가 문제인지 모를때 역시 전문가를 만나야 해결된다는걸 오늘 절실하게 느꼈어요. 잘못된부분 바로 잡아주시고, 바른자세 시범보여주시고... 오늘 레슨받고 연습 좀했더니 많이 나아졌어요~ 골프에서의 멘탈 중요성도 굵고 짧게 설명해주셔서 많은 도움되었어요~ 추천해요~~^^"
             </p>
             <div style="display:flex;align-items:center;gap:10px">
               <div style="width:36px;height:36px;border-radius:50%;background:var(--border);flex-shrink:0"></div>
               <div>
-                <p style="font-size:13px;font-weight:600">일상의 루틴</p>
+                <p style="font-size:13px;font-weight:600">십***</p>
+                <p style="font-size:12px;color:var(--muted);margin-top:2px">5.22.금 · 3번째 방문 · 영수증</p>
                 <p style="font-size:12px;color:var(--muted)">네이버 플레이스 리뷰</p>
               </div>
             </div>
@@ -1779,12 +1829,13 @@
               <span style="color:var(--accent);font-size:18px">★★★★★</span>
             </div>
             <p style="font-size:15px;line-height:1.75;margin-bottom:20px;color:var(--text)">
-              "트랙맨 프로그램으로 저의 문제점을 데이터로 확실하게 볼 수 있었고, 프로님이 항상 레슨일지로 사진과 글을 비교하면서 문제점을 너무 적나라하게 잘 꼭 집어 주세요!! 여기근처에서 이곳만큼 시설도 깔끔하고 주차장도 넓으면서 레슨 받기 좋은 공간은 없는 것 같아요!!"
+              "서해리 프로님께서 기본부터 탄탄하게 자세를 잡아주시고, 왜 잘못된 동작이 나오는지와 어떻게 교정하면 더 좋은 스윙이 되는지 정말 상세하게 설명해주셔서 이해가 잘 됩니다. 또 레슨 분위기도 좋아서 골프에 대한 재미를 자연스럽게 느끼게 해주시는 점이 가장 만족스럽습니다. 골프와 친해지고 싶은 분들께 추천 드립니다!"
             </p>
             <div style="display:flex;align-items:center;gap:10px">
               <div style="width:36px;height:36px;border-radius:50%;background:var(--border);flex-shrink:0"></div>
               <div>
-                <p style="font-size:13px;font-weight:600">polaris861015</p>
+                <p style="font-size:13px;font-weight:600">han***</p>
+                <p style="font-size:12px;color:var(--muted);margin-top:2px">5.15.금 · 4번째 방문 · 영수증</p>
                 <p style="font-size:12px;color:var(--muted)">네이버 플레이스 리뷰</p>
               </div>
             </div>
@@ -1872,9 +1923,10 @@
         <!-- 프로그램 섹션 하단 CTA -->
         <div style="text-align:center;margin-top:48px" class="reveal">
           <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
-            <a href="#contact" class="btn btn-primary"
-               onclick="gtag('event','cta_click',{button:'programs_form'})">
-              체험수업 신청하기
+            <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+               class="btn btn-primary"
+               onclick="gtag('event','cta_click',{button:'programs_place'})">
+              네이버 플레이스
             </a>
             <a href="tel:010-8441-3065" class="btn btn-tertiary"
                onclick="gtag('event','cta_click',{button:'programs_call'})">
@@ -2061,7 +2113,7 @@
           <div class="process-step reveal" data-delay="1">
             <div class="step-number">1</div>
             <h3 class="step-title">문의</h3>
-            <p class="step-desc">전화·카카오·폼 중 편한 방법으로 연락주세요. 부담 없이 질문하셔도 됩니다.</p>
+            <p class="step-desc">전화·네이버 톡톡·네이버 플레이스 중 편한 방법으로 연락주세요. 부담 없이 질문하셔도 됩니다.</p>
           </div>
 
           <div class="process-step reveal" data-delay="2">
@@ -2297,18 +2349,17 @@
               </div>
             </a>
 
-            <!-- 카카오 채널 — URL 확정 후 교체 -->
-            <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
+            <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
                class="contact-channel reveal" data-delay="1"
-               onclick="gtag('event','cta_click',{button:'contact_kakao'})">
-              <div class="contact-channel-icon" style="background:rgba(254,229,0,.1);color:#3C1E1E">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#3C1E1E">
-                  <path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.736 1.564 5.149 3.938 6.615l-.938 3.505 4.062-2.688C10.015 18.396 11.001 18.5 12 18.5c5.523 0 10-3.477 10-7.7S17.523 3 12 3z"/>
+               onclick="gtag('event','cta_click',{button:'contact_place'})">
+              <div class="contact-channel-icon" style="background:rgba(3,199,90,.1);color:#03C75A">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#03C75A">
+                  <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
                 </svg>
               </div>
               <div>
-                <p class="contact-channel-label">카카오 채널</p>
-                <p class="contact-channel-value">카카오로 상담하기</p>
+                <p class="contact-channel-label">네이버 플레이스</p>
+                <p class="contact-channel-value">위치·예약 정보 보기</p>
               </div>
             </a>
 
@@ -2345,69 +2396,18 @@
 
           </div>
 
-          <!-- 문의 폼 -->
+          <!-- 네이버 플레이스 안내 -->
           <div class="form-card reveal" data-delay="1">
-            <h3 class="form-title">문의 남기기</h3>
-
-            <form id="contact-form" novalidate>
-
-              <div class="form-group">
-                <label class="form-label" for="f-name">이름 <span class="required">*</span></label>
-                <input type="text" id="f-name" name="name" class="form-input"
-                       placeholder="홍길동" autocomplete="name" required />
-                <p class="form-error" id="err-name">이름을 입력해주세요.</p>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="f-phone">연락처 <span class="required">*</span></label>
-                <input type="tel" id="f-phone" name="phone" class="form-input"
-                       placeholder="010-0000-0000" autocomplete="tel" required />
-                <p class="form-error" id="err-phone">연락처를 입력해주세요.</p>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="f-interest">관심 레슨</label>
-                <select id="f-interest" name="interest" class="form-select">
-                  <option value="">선택해주세요 (선택사항)</option>
-                  <option value="field">필드 레슨</option>
-                  <option value="shortgame">숏게임 레슨</option>
-                  <option value="outside">외부 레슨</option>
-                  <option value="corporate">법인·단체 문의</option>
-                  <option value="etc">기타</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="f-message">문의 내용</label>
-                <textarea id="f-message" name="message" class="form-textarea"
-                          placeholder="궁금한 점이나 현재 상황을 자유롭게 적어주세요."></textarea>
-              </div>
-
-              <div class="form-consent">
-                <input type="checkbox" id="f-consent" name="consent" required />
-                <label for="f-consent">
-                  <a href="/privacy" target="_blank">개인정보처리방침</a>에 동의하며,
-                  입력한 정보를 상담 목적으로 수집·이용하는 것에 동의합니다. <span class="required" style="color:var(--accent)">*</span>
-                </label>
-              </div>
-              <p class="form-error" id="err-consent">개인정보처리방침에 동의해주세요.</p>
-
-              <button type="submit" class="btn btn-primary form-submit" id="form-submit-btn">
-                문의 보내기
-              </button>
-
-            </form>
-
-            <!-- 성공 메시지 -->
-            <div class="form-success" id="form-success">
-              <div class="form-success-icon">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                </svg>
-              </div>
-              <h3 style="font-size:18px;margin-bottom:8px">문의가 접수되었습니다</h3>
-              <p style="font-size:14px;color:var(--muted)">빠르게 확인 후 연락드리겠습니다.</p>
-            </div>
+            <h3 class="form-title">네이버 플레이스에서 문의하기</h3>
+            <p style="font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:24px">
+              체험수업과 레슨 문의는 네이버 플레이스에서도 바로 확인하실 수 있습니다.
+              위치, 운영 정보, 리뷰를 함께 살펴본 뒤 편한 방식으로 연락주세요.
+            </p>
+            <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+               class="btn btn-primary form-submit"
+               onclick="gtag('event','cta_click',{button:'contact_form_place'})">
+              네이버 플레이스에서 보기
+            </a>
 
           </div>
 
@@ -2483,9 +2483,7 @@
         <p class="coach-modal-eyebrow">Coach Profile</p>
         <h3 class="coach-modal-name" id="coachModalName"></h3>
         <p class="coach-modal-role" id="coachModalRole"></p>
-        <p class="coach-modal-desc">
-          프로필 사진과 직함을 더 큰 화면으로 확인해보세요. 상담이 필요하면 아래 체험수업 신청 버튼으로 바로 문의하실 수 있습니다.
-        </p>
+        <div class="coach-modal-profile" id="coachModalProfile"></div>
       </div>
     </div>
   </div>
@@ -2502,16 +2500,17 @@
       </svg>
       전화
     </a>
-    <a href="https://open.kakao.com/o/sDiMntoi" target="_blank" rel="noopener"
-       class="sticky-btn sticky-btn-kakao"
-       onclick="gtag('event','cta_click',{button:'sticky_kakao'})">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#3C1E1E">
-        <path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.736 1.564 5.149 3.938 6.615l-.938 3.505 4.062-2.688C10.015 18.396 11.001 18.5 12 18.5c5.523 0 10-3.477 10-7.7S17.523 3 12 3z"/>
+    <a href="https://talk.naver.com/ct/w4590o" target="_blank" rel="noopener"
+       class="sticky-btn sticky-btn-naver"
+       onclick="gtag('event','cta_click',{button:'sticky_naver'})">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
       </svg>
-      카카오
+      톡톡
     </a>
-    <a href="#contact" class="sticky-btn sticky-btn-form"
-       onclick="gtag('event','cta_click',{button:'sticky_form'})">
+    <a href="https://m.place.naver.com/place/1612034208" target="_blank" rel="noopener"
+       class="sticky-btn sticky-btn-form"
+       onclick="gtag('event','cta_click',{button:'sticky_place'})">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
       </svg>
@@ -2583,104 +2582,166 @@
       });
     });
 
-
-    // ── 폼 유효성 검사 ───────────────────────────────────────────
-    const form = document.getElementById('contact-form');
-    let isSubmitting = false;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (isSubmitting) return;
-      let valid = true;
-
-      // 이름
-      const name = document.getElementById('f-name');
-      const errName = document.getElementById('err-name');
-      if (!name.value.trim()) {
-        name.classList.add('error');
-        errName.classList.add('visible');
-        valid = false;
-      } else {
-        name.classList.remove('error');
-        errName.classList.remove('visible');
-      }
-
-      // 연락처
-      const phone = document.getElementById('f-phone');
-      const errPhone = document.getElementById('err-phone');
-      if (!phone.value.trim()) {
-        phone.classList.add('error');
-        errPhone.classList.add('visible');
-        valid = false;
-      } else {
-        phone.classList.remove('error');
-        errPhone.classList.remove('visible');
-      }
-
-      // 동의
-      const consent = document.getElementById('f-consent');
-      const errConsent = document.getElementById('err-consent');
-      if (!consent.checked) {
-        errConsent.classList.add('visible');
-        valid = false;
-      } else {
-        errConsent.classList.remove('visible');
-      }
-
-      if (!valid) return;
-
-      // 제출 버튼 로딩
-      const submitBtn = document.getElementById('form-submit-btn');
-      isSubmitting = true;
-      submitBtn.textContent = '전송 중...';
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.6';
-
-      const API_URL = 'https://railway-admin-production.up.railway.app/api/inquiries';
-      try {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name:        name.value.trim(),
-            phone:       phone.value.trim(),
-            lesson_type: document.getElementById('f-interest').value,
-            message:     document.getElementById('f-message').value.trim(),
-            referrer:    document.referrer,
-            utm_source:  new URLSearchParams(location.search).get('utm_source') || '',
-          })
-        });
-        if (!res.ok) throw new Error('서버 오류');
-      } catch {
-        isSubmitting = false;
-        submitBtn.textContent = '다시 시도해주세요';
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-        return;
-      }
-
-      gtag('event', 'form_submit', { form: 'contact' });
-
-      form.reset();
-      form.style.display = 'none';
-      document.getElementById('form-success').classList.add('visible');
-    });
-
-    // ── URL 파라미터로 관심 레슨 preselect ──────────────────────
-    (function() {
-      const params = new URLSearchParams(location.hash.replace(/^#contact\?/, ''));
-      const interest = params.get('interest');
-      if (interest) {
-        const select = document.getElementById('f-interest');
-        if (select) select.value = interest;
-      }
-    })();
-
     const coachModalOverlay = document.getElementById('coachModalOverlay');
     const coachModalClose = document.getElementById('coachModalClose');
     const coachModalImage = document.getElementById('coachModalImage');
     const coachModalName = document.getElementById('coachModalName');
     const coachModalRole = document.getElementById('coachModalRole');
+    const coachModalProfile = document.getElementById('coachModalProfile');
+
+    const coachProfiles = {
+      '양정화': {
+        '자격사항': [
+          'KLPGA 정회원',
+          'LPGA TEP L.v 1',
+          '국민대학교 헬스케어매니지먼트 석사',
+          '한양대학교 레저스포츠 학사',
+          '전문스포츠지도사 골프 2급',
+          '노인스포츠지도사 골프 2급',
+          '민주평화통일자문위원회 동작구 갑 체육분과위원장',
+          'TPI LEVEL 1',
+          'SOMECO 해부학 전문가과정 수료',
+          'SOMECO GOLF 전문가과정 수료',
+          'Edel Putter Fitting Clinic 수료',
+          'Balance Corefit LEVEL 1,2,3 수료',
+          'Golf Data Analysis Professional Course 수료',
+          'Trackman Seminar 수료',
+        ],
+      },
+      '김효선': {
+        '자격사항': [
+          'LPGA CLASS A',
+          'KLPGA PRO',
+          '한양대학교 레저스포츠 체육학 재학',
+          '스페인어 자격증 C1',
+          'TPI LEVEL 1',
+          'THE GOLFING MACHINE 수료',
+          'GOLF FITNESS: 흉추회전 과정 수료',
+          'SOMECO ANATOMY 8주 과정 수료',
+          'BALANCE COREFIT LEVEL 1,2,3 수료',
+          'PUTTER FITTING CLINIC 수료',
+          'TRACKMAN SEMINAR 수료',
+          'GOLF DATA ANALYSIS PROFESSIONAL COURSE 수료',
+        ],
+        '경력사항': [
+          '2018- KLPGA TOUR',
+          '2022-현재 구찌골프 소속 헤드프로',
+        ],
+        '주요성적': [
+          'KLPGA 2019-2021 3년 연속 투어 풀시드',
+          '2018 토백이·백제CC 점프투어 5위',
+          '2018 그랜드·삼대인 점프투어 8차전 12위',
+          '2018 그랜드·삼대인 점프투어 9차전 7위',
+          '2019 토백이·백제CC 점프투어 1차전 17위',
+          '2019 솔라고·파워풀엑스 점프투어 11차전 5위',
+          '2020 파워풀엑스·솔라고 점프투어 10차전 4위',
+          '2021 그랜드·삼대인 점프투어 7차전 20위',
+          '그 외 KLPGA 시합 다수 입상',
+        ],
+      },
+      '조채영': {
+        '자격사항': [
+          'KLPGA PRO',
+          'LPGA TEP Level 1',
+          'TPI Level 1',
+          'TPI Level 2',
+          '중앙대학교 골프학과 졸업',
+          'TRACKMAN SEMINAR 수료',
+          'GOLF DATA ANALYSIS PROFESSIONAL COURSE 수료',
+          'ADEL PUTTER FITTING CLINIC 수료',
+          '증권투자자문인력',
+          '투자자산운용사',
+        ],
+        '경력사항': [
+          '2015~2020 미래에셋증권 프로골프단 VIP 고객 레슨',
+          '2020~2022 메리츠증권 VIP 고객레슨 법인영업',
+          '2023~2024 이룸골프아카데미 강남센터 메인프로',
+          '2024~현재 구찌골프스튜디오 메인프로',
+        ],
+        '주요성적': [
+          '2005 서울시장배 청소년골프대회 여고부 우승',
+          '2006 빅야드 파맥스 중고연맹 여고부 단체전 우승',
+          '2006~2009 드림투어 풀시드',
+          '2007 드림투어 시드순위전 3등',
+          '2007 제니아엔조이골프투어 5차전 8등',
+        ],
+      },
+      '서해리': {
+        '자격사항': [
+          'KLPGA PRO',
+          'TPI Level 1',
+          'GOLF FITNESS: 흉추회전 수료',
+          'PUTTER FITTING CLINIC 수료',
+        ],
+        '주요성적': [
+          '2015~2016 전국체육대회 골프 제주도 대표 선발',
+          '2016 송보배컵 전도주니어골프대회 여고등부 우승',
+          '2016 MBC·오라배 전도주니어골프선수권대회 여고등부 우승',
+          'KLPGA 2019 석정힐CC 시드순위전 예선 1위',
+          'KLPGA 2019 석정힐CC 시드순위전 본선 1위',
+          '2015 박인비배 제주도주니어골프선수권대회 여고등부 3위',
+          '2015 MBC·오라배 전도주니어골프선수권대회 여고등부 3위',
+          'KLPGA 2020 볼빅·백제CC 점프투어 5차전 4위',
+          'KLPGA 2019 솔라고·파워풀엑스 점프투어 12차전 14위',
+          'KLPGA 2021 XGOLF·백제CC 점프투어 2차전 14위',
+          'KLPGA 2019 토백이·백제CC 점프투어 2차전 17위',
+          'KLPGA 2020 파워풀엑스·솔라고 점프투어 10차전 17위',
+          'KLPGA 2019 석정힐CC·코리아 드라이브 점프투어 16차전 18위',
+        ],
+        '경력사항': [
+          "2023 SG GOLF 'FUNFUN MATCH' 4 출연",
+          "2024 SG GOLF 'FUNFUN MATCH' 5 출연",
+          "2025 SG GOLF 'THE MATCH CHAMPIONSHIP' 출연",
+          "2024 '공치는 명훈이' YOUTUBE 출연",
+          "2025 '공치는 명훈이' YOUTUBE 출연",
+        ],
+      },
+      '이유민': {
+        '자격사항': [
+          'KLPGA 정회원',
+          '성균관대학교 스포츠과학과 졸업',
+          '골프 데이터의 정의 및 응용 교육 수료',
+        ],
+        '경력사항': [
+          '2016- KLPGA TOUR',
+          '2025- 청라 프렌즈 아카데미 근무',
+          '송도 QED 아카데미 근무',
+          '2026-현재 구찌골프 소속 메인프로',
+        ],
+        '주요성적': [
+          '2013 한국중고연맹 스포츠조선배 준우승',
+          '2014 한국중고연맹 회장배 준우승',
+          '2016 신안그룹배 점프투어 12차전 우승',
+          '2016 신안그룹배 점프투어 3차 디비전 상금순위 1위',
+          '2018 백제CC 드림투어 11차전 준우승',
+          '그 외 드림투어 TOP10 다수',
+          '초·중·고 인천시장배, 교육감배 등 인천시 대회 다수 우승',
+          '그 외 한국중고연맹 TOP10 다수',
+          '2016 신안그룹배 점프투어 10차전 3위',
+          '2019 정규투어 시드 순위 42위 부분시드 활동',
+          '2019 드림투어 풀 시드권 보유',
+          '2019 군산CC 드림투어 1차 대회 5위',
+          '2021 정규투어 시드 순위 48위 부분시드 활동',
+        ],
+      },
+    };
+
+    function renderCoachProfile(name) {
+      const profile = coachProfiles[name];
+      if (!profile) {
+        coachModalProfile.innerHTML = '<p class="coach-modal-desc">프로필 사진과 직함을 더 큰 화면으로 확인해보세요.</p>';
+        return;
+      }
+
+      coachModalProfile.innerHTML = Object.entries(profile).map(([title, items]) => `
+        <section>
+          <h4 class="coach-profile-section-title">${title}</h4>
+          <ul class="coach-credentials">
+            ${items.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </section>
+      `).join('');
+    }
 
     function openCoachModal(card) {
       const image = card.querySelector('.coach-photo');
@@ -2692,6 +2753,7 @@
       coachModalImage.alt = image.alt || `${name} ${role}`.trim();
       coachModalName.textContent = name;
       coachModalRole.textContent = role;
+      renderCoachProfile(name);
       coachModalOverlay.classList.add('open');
       coachModalOverlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -2748,33 +2810,6 @@
             </div>
           `).join('');
           section.style.display = 'block';
-        })
-        .catch(() => {});
-
-      // 수강생 후기
-      fetch(`${API}/api/reviews`)
-        .then(r => r.json())
-        .then(reviews => {
-          if (!reviews.length) return;
-          const grid = document.getElementById('landing-reviews-grid');
-          grid.innerHTML = reviews.map((r, i) => `
-            <div class="reveal" data-delay="${(i % 3) + 1}"
-              style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px">
-              <div style="display:flex;gap:4px;margin-bottom:16px">
-                <span style="color:var(--accent);font-size:18px">★★★★★</span>
-              </div>
-              <p style="font-size:15px;line-height:1.75;margin-bottom:20px;color:var(--text)">
-                "${r.content}"
-              </p>
-              <div style="display:flex;align-items:center;gap:10px">
-                <div style="width:36px;height:36px;border-radius:50%;background:var(--border);flex-shrink:0"></div>
-                <div>
-                  <p style="font-size:13px;font-weight:600">${r.author}</p>
-                  <p style="font-size:12px;color:var(--muted)">${r.source}</p>
-                </div>
-              </div>
-            </div>
-          `).join('');
         })
         .catch(() => {});
     })();
